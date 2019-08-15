@@ -1,3 +1,7 @@
+html.tealium-modal-open {
+  overflow: hidden;
+}
+
 .tealium-modal {
   position: absolute;
   z-index: 9999;

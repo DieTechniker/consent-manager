@@ -7,7 +7,10 @@
     $modal = document.getElementById('__tealiumGDPRecModal'),
     $closeBtn = $modal.getElementsByClassName('close_btn_thick')[0],
     $privacy_pref_optin = document.getElementById('privacy_pref_optin'),
-    $privacy_pref_optout = document.getElementById('privacy_pref_optout');
+    $privacy_pref_optout = document.getElementById('privacy_pref_optout'),
+    $documentElement = document.querySelector('html');
+
+  $documentElement.classList.add('tealium-modal-open');
 
   var consentState = utag.gdpr.getConsentState();
   if (typeof consentState === 'number') {
@@ -38,6 +41,7 @@
   };
   var closePrompt = function() {
     $modal.style.display = 'none';
+    $documentElement.classList.remove('tealium-modal-open');
   };
   if (document.addEventListener) {
     $el.addEventListener('click', callBack, false);
