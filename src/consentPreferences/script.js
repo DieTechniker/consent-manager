@@ -3,23 +3,23 @@
 	  PLEASE CONTACT SUPPORT FOR ASSISTANCE IF YOU NEED TO MODIFY.
 ***************************************************************************/
 (function preferences_prompt() {
-  var $el = document.getElementById('preferences_prompt_submit');
+  var $preferencesPromptSubmit = document.getElementById('preferences_prompt_submit');
   var $modal = document.getElementById('__tealiumGDPRcpPrefs');
   var $closeBtn = $modal.getElementsByClassName('close_btn_thick')[0];
   var $body = $modal.getElementsByClassName('consent_preferences')[0];
-  var reg_match = /\d+$/;
+  var regMatch = /\d+$/;
   var i;
   var $documentElement = document.querySelector('html');
 
   $documentElement.classList.add('tealium-modal-open');
 
-  var callBack = function() {
+  var handleSubmit = function() {
     var inputs = $body.getElementsByClassName('toggle');
     var cats = {};
 
     for (var i = 0; i < inputs.length; i++) {
       var obj = inputs[i];
-      cats[obj.id.match(reg_match)[0]] = obj.checked ? 1 : 0;
+      cats[obj.id.match(regMatch)[0]] = obj.checked ? 1 : 0;
     }
     closePrompt();
 
@@ -54,13 +54,13 @@
   }
 
   if (document.addEventListener) {
-    $el.addEventListener('click', callBack, false);
+    $preferencesPromptSubmit.addEventListener('click', handleSubmit, false);
     $closeBtn.addEventListener('click', closePrompt, false);
   } else if (document.attachEvent) {
-    $el.attachEvent('click', callBack);
+    $preferencesPromptSubmit.attachEvent('click', handleSubmit);
     $closeBtn.attachEvent('click', closePrompt);
   } else {
-    $el.onclick = callBack;
+    $preferencesPromptSubmit.onclick = handleSubmit;
     $closeBtn.onclick = closePrompt;
   }
 })();
