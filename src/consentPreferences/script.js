@@ -3,16 +3,19 @@
 	  PLEASE CONTACT SUPPORT FOR ASSISTANCE IF YOU NEED TO MODIFY.
 ***************************************************************************/
 (function preferences_prompt() {
-  var $el = document.getElementById('preferences_prompt_submit'),
-    $modal = document.getElementById('__tealiumGDPRcpPrefs'),
-    $closeBtn = $modal.getElementsByClassName('close_btn_thick')[0],
-    $body = $modal.getElementsByClassName('consent_preferences')[0],
-    reg_match = /\d+$/,
-    i;
+  var $el = document.getElementById('preferences_prompt_submit');
+  var $modal = document.getElementById('__tealiumGDPRcpPrefs');
+  var $closeBtn = $modal.getElementsByClassName('close_btn_thick')[0];
+  var $body = $modal.getElementsByClassName('consent_preferences')[0];
+  var reg_match = /\d+$/;
+  var i;
+  var $documentElement = document.querySelector('html');
+
+  $documentElement.classList.add('tealium-modal-open');
 
   var callBack = function() {
-    var inputs = $body.getElementsByClassName('toggle'),
-      cats = {};
+    var inputs = $body.getElementsByClassName('toggle');
+    var cats = {};
 
     for (var i = 0; i < inputs.length; i++) {
       var obj = inputs[i];
@@ -27,6 +30,7 @@
   };
   var closePrompt = function() {
     $modal.style.display = 'none';
+    $documentElement.classList.remove('tealium-modal-open');
   };
 
   var consentState = utag.gdpr.getConsentState();
