@@ -1,170 +1,173 @@
-<div class="privacy_prompt consent_preferences">
-  <div class="privacy_prompt_content">
-    <h1>{{ title }}</h1>
-    <!-- <img src="{{ company_logo_url }}" class="logo" /> -->
-    <p>{{ message }}</p>
-    <table>
-      <tr>
-        <th>{{ category }}</th>
-        <th>{{ description }}</th>
-        <th>{{ status }}</th>
-      </tr>
-      <tr>
-        <td>{{ category_analytics_title }}</td>
-        <td>{{ category_analytics_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat1" />
-          <label for="toggle_cat1">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_affiliates_title }}</td>
-        <td>{{ category_affiliates_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat2" />
-          <label for="toggle_cat2">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_display_ads_title }}</td>
-        <td>{{ category_display_ads_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat3" />
-          <label for="toggle_cat3">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_search_title }}</td>
-        <td>{{ category_search_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat4" />
-          <label for="toggle_cat4">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_email_title }}</td>
-        <td>{{ category_email_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat5" />
-          <label for="toggle_cat5">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_personalization_title }}</td>
-        <td>{{ category_personalization_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat6" />
-          <label for="toggle_cat6">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_social_title }}</td>
-        <td>{{ category_social_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat7" />
-          <label for="toggle_cat7">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_big_data_title }}</td>
-        <td>{{ category_big_data_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat8" />
-          <label for="toggle_cat8">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_misc_title }}</td>
-        <td>{{ category_misc_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat9" />
-          <label for="toggle_cat9">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_cookiematch_title }}</td>
-        <td>{{ category_cookiematch_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat10" />
-          <label for="toggle_cat10">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_cdp_title }}</td>
-        <td>{{ category_cdp_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat11" />
-          <label for="toggle_cat11">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_mobile_title }}</td>
-        <td>{{ category_mobile_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat12" />
-          <label for="toggle_cat12">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_engagement_title }}</td>
-        <td>{{ category_engagement_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat13" />
-          <label for="toggle_cat13">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_monitoring_title }}</td>
-        <td>{{ category_monitoring_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat14" />
-          <label for="toggle_cat14">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>{{ category_crm_title }}</td>
-        <td>{{ category_crm_description }}</td>
-        <td>
-          <input type="checkbox" class="toggle" id="toggle_cat15" />
-          <label for="toggle_cat15">
-            <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
-          >
-        </td>
-      </tr>
-    </table>
-  </div>
-  <div class="privacy_prompt_footer">
-    <div id="preferences_prompt_submit" class="button right">
-      {{ confirmation_button }}
+<div class="tealium-modal">
+  <div class="privacy_prompt consent_preferences">
+    <div class="privacy_prompt_content">
+      <h1>{{ title }}</h1>
+      <p>{{ message }}</p>
+      <table>
+        <tr>
+          <th>{{ category }}</th>
+          <th>{{ description }}</th>
+          <th>{{ status }}</th>
+        </tr>
+        <tr>
+          <td>{{ category_misc_title }}</td>
+          <td>{{ category_misc_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat9" />
+            <label for="toggle_cat9">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_analytics_title }}</td>
+          <td>{{ category_analytics_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat1" />
+            <label for="toggle_cat1">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <!-- <tr>
+          <td>{{ category_affiliates_title }}</td>
+          <td>{{ category_affiliates_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat2" />
+            <label for="toggle_cat2">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr> -->
+        <tr>
+          <td>{{ category_display_ads_title }}</td>
+          <td>{{ category_display_ads_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat3" />
+            <label for="toggle_cat3">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <!-- 
+        <tr>
+          <td>{{ category_search_title }}</td>
+          <td>{{ category_search_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat4" />
+            <label for="toggle_cat4">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_email_title }}</td>
+          <td>{{ category_email_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat5" />
+            <label for="toggle_cat5">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_personalization_title }}</td>
+          <td>{{ category_personalization_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat6" />
+            <label for="toggle_cat6">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_social_title }}</td>
+          <td>{{ category_social_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat7" />
+            <label for="toggle_cat7">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_big_data_title }}</td>
+          <td>{{ category_big_data_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat8" />
+            <label for="toggle_cat8">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_cookiematch_title }}</td>
+          <td>{{ category_cookiematch_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat10" />
+            <label for="toggle_cat10">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_cdp_title }}</td>
+          <td>{{ category_cdp_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat11" />
+            <label for="toggle_cat11">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_mobile_title }}</td>
+          <td>{{ category_mobile_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat12" />
+            <label for="toggle_cat12">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_engagement_title }}</td>
+          <td>{{ category_engagement_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat13" />
+            <label for="toggle_cat13">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_monitoring_title }}</td>
+          <td>{{ category_monitoring_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat14" />
+            <label for="toggle_cat14">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr>
+        <tr>
+          <td>{{ category_crm_title }}</td>
+          <td>{{ category_crm_description }}</td>
+          <td>
+            <input type="checkbox" class="toggle" id="toggle_cat15" />
+            <label for="toggle_cat15">
+              <span class="on">{{ yes }}</span> <span class="off">{{ no }}</span></label
+            >
+          </td>
+        </tr> 
+        -->
+      </table>
     </div>
+    <div class="privacy_prompt_footer">
+      <div id="preferences_prompt_submit" class="button right">
+        {{ confirmation_button }}
+      </div>
+    </div>
+    <div class="close_btn_thick"></div>
   </div>
-  <div class="close_btn_thick"></div>
 </div>
