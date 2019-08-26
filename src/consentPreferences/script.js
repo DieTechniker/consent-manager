@@ -5,8 +5,8 @@
 (function preferences_prompt() {
   var $preferencesPromptSubmit = document.getElementById('preferences_prompt_submit');
   var $modal = document.getElementById('__tealiumGDPRcpPrefs');
-  var $closeBtn = $modal.getElementsByClassName('close_btn_thick')[0];
-  var $body = $modal.getElementsByClassName('consent_preferences')[0];
+  var $closeBtn = $modal.querySelector('.close_btn_thick');
+  var $body = $modal.querySelector('.consent_preferences');
   var regMatch = /\d+$/;
   var i;
   var $documentElement = document.querySelector('html');
@@ -28,6 +28,7 @@
        setTimeout(function (){if (window.utag && window.utag.udoname || window.utag_data) {utag.view(window[window.utag && window.utag.udoname || "utag_data"]);}},0);
        ****/
   };
+
   var closePrompt = function() {
     $modal.style.display = 'none';
     $documentElement.classList.remove('tealium-modal-open');
@@ -42,7 +43,10 @@
       _state = !!utag.gdpr.preferences_prompt.defaultState;
     }
     for (i = 0; i < utag.gdpr.getCategories().length; i++) {
-      document.getElementById('toggle_cat' + (i + 1)).checked = _state;
+      var $checkbox = document.getElementById('toggle_cat' + (i + 1));
+      if ($checkbox) {
+        $checkbox.checked = _state;
+      }
     }
   } else {
     for (i = 0; i < consentState.length; i++) {
