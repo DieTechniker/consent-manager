@@ -18,13 +18,16 @@ html.tealium-modal-open {
 }
 
 .privacy_prompt {
+  max-height: 100%;
+  overflow: auto;
   position: relative;
-  width: 600px;
+  max-width: 900px;
+  margin: 30px;
 
   text-align: left;
   border: 1px solid #ccc;
   background-color: #fff;
-  color: #444;
+  color: #454542;
   font-size: 14px;
   word-break: break-word;
 }
@@ -36,18 +39,23 @@ html.tealium-modal-open {
 
 .privacy_prompt_content {
   padding: 20px;
-  font-size: 0.9em;
+  font-size: 16px;
 }
 
-.privacy_prompt h1 {
-  font-size: 1.3em;
-  color: #444;
+.privacy_prompt_content p {
+  margin-bottom: 1em;
+}
+
+.privacy_prompt_headline {
+  font-size: 26px;
+  color: #454542;
   font-weight: 400;
+  margin-bottom: 0.5em;
 }
 
 .privacy_prompt .option {
   margin: 10px 0px;
-  color: #444;
+  color: #454542;
 }
 
 .privacy_prompt_footer {
@@ -144,6 +152,7 @@ html.tealium-modal-open {
 
 .privacy_prompt input[type='checkbox'].toggle + label {
   height: 24px;
+  min-width: 85px;
   line-height: 24px;
   background-color: #ccc;
   padding: 0px 16px;
@@ -222,8 +231,10 @@ html.tealium-modal-open {
   max-height: 24px;
   height: 24px;
 }
-@media (max-width: 780px) {
+
+@media (max-width: 768px) {
   #__tealiumGDPRcpPrefs .privacy_prompt {
+    position: absolute;
     width: 90%;
     margin: 0 auto;
     left: 5%;
@@ -232,7 +243,7 @@ html.tealium-modal-open {
     float: none;
     width: 100%;
   }
-  #__tealiumGDPRcpPrefs .privacy_prompt_content h1 {
+  #__tealiumGDPRcpPrefs .privacy_prompt_headline {
     text-align: center;
   }
   #__tealiumGDPRcpPrefs .privacy_prompt_content img {
