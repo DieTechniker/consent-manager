@@ -13,7 +13,7 @@
 
   $documentElement.classList.add('tealium-modal-open');
 
-  var handleSubmit = function() {
+  var handleSubmit = function () {
     var inputs = $body.getElementsByClassName('toggle');
     var cats = {};
 
@@ -29,7 +29,7 @@
        ****/
   };
 
-  var closePrompt = function() {
+  var closePrompt = function () {
     $modal.style.display = 'none';
     $documentElement.classList.remove('tealium-modal-open');
   };
