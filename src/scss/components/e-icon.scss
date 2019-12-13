@@ -1,0 +1,48 @@
+
+/**
+ * Base styles -------------------------------------------------
+ */
+
+$e-icon-styles-mapping: (
+    'default': 'style-cluster-1',
+    'faq': 'style-cluster-2',
+    'gm': 'style-cluster-2',
+    'mitgliedwerden': 'style-cluster-3',
+    'meinetk': 'style-cluster-3'
+);
+
+.e-icon {
+    fill: $color-anthracite-a2;
+    color: $color-grey-g4; // because some icons are not integerated correctly right now
+}
+
+.e-icon--inline {
+    margin-right: -4.5px;
+    display: inline-block;
+}
+
+.e-icon--block {
+    display: block;
+}
+
+.has-icon {
+    @include has-icon;
+}
+
+.e-icon--text {
+    position: absolute;
+    display: block;
+    height: .8em;
+    left: 0;
+    top: .33em;
+}
+
+
+.e-icon--illustration {
+    // illustrations use fill: currentColor
+    @include use-bereich-styles($e-icon-styles-mapping, ('color'));
+
+    .m-header--hasbackgroundcolor & {
+        color: $color-white-w1;
+    }
+}

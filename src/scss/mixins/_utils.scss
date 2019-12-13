@@ -1,0 +1,508 @@
+
+/**
+ * Update a deeply nested key
+ *
+ * @author Hugo Giraudel
+ * @param {Map} $map - Map to update
+ * @param {Arglist} $keys - Keys to access to value to update
+ * @param {*} $value - New value (last member of `$keys`)
+ * @return {Map} - Updated map
+ */
+@function map-deep-set($map, $keys.../*, $value */) {
+    $map-list: ($map,);
+    $result: null;
+
+    @if length($keys) == 2 {
+        @return map-merge($map, (nth($keys, 1): nth($keys, -1)));
+    }
+
+    @for $i from 1 through length($keys) - 2 {
+        $map-list: append($map-list, map-get(nth($map-list, -1), nth($keys, $i)));
+    }
+
+    @for $i from length($map-list) through 1 {
+        $result: map-merge(nth($map-list, $i), (nth($keys, $i): if($i == length($map-list), nth($keys, -1), $result)));
+    }
+
+    @return $result;
+}
+
+
+/**
+ * Returns the item named $key from $map.
+ * If $key is not found $default is returned.
+ *
+ * @param {Map} $map
+ * @param {String} $key
+ * @param {*} $default
+ * @returns {*}
+ */
+@function map-get-default($map, $key, $default) {
+    @if ($map) {
+        @if (map-has-key($map, $key)) {
+            @return map-get($map, $key);
+        }
+    }
+    @return $default;
+}
+
+
+/**
+ * Creates a property list based of $map.
+ * Each property name is prefixed with $prefix.
+ * When $ignore is given every property found in the list will be ignored.
+ *
+ * @param {Map} $map
+ * @param {String} $prefix
+ * @param {List} $ignore
+ * @returns {void}
+ */
+@mixin map-as-properties($map, $prefix: '', $ignore: none, $include: all) {
+    @if ($map) {
+        @each $property, $value in $map {
+            @if (($ignore == none or not index($ignore, $property)) and ($include == all or index($include, $property))) {
+                #{$prefix}#{$property}: $value;
+            }
+        }
+    }
+}
+
+
+/**
+ * Define hover styles for screens >= $breakpoint-global-hover
+ *
+ * @param {boolean} $include-focus
+ * @param {breakpoint} $hover-breakpoint
+ * @returns {void}
+ */
+@mixin hover($include-focus: true, $include-active: false, $include-is-active: false) {
+
+    @if $include-focus == true {
+        &:focus {
+            @content;
+        }
+    }
+
+    @if $include-active == true {
+        &:active {
+            @content;
+        }
+    }
+
+    @if $include-is-active == true {
+        &.is-active {
+            @content;
+        }
+    }
+
+    &:hover,
+    &.is-hover {
+        // KAWEB-3662 fix
+        // sass-lint:disable force-pseudo-nesting
+        body:not(.is-ios) & {
+            @content;
+        }
+        // sass-lint:enable force-pseudo-nesting
+    }
+
+    // all touch devices should not have the transition for their hover state and important is necessary
+    // sass-lint:disable no-important
+    .has-touch & {
+        transition-duration: 0s !important;
+
+        * {
+            transition-duration: 0s  !important;
+
+            &::after,
+            &::before {
+                transition-duration: 0s !important;
+            }
+        }
+    }
+    // sass-lint:enable no-important
+}
+
+
+/**
+ * Define keyboardfocus state
+ * @returns {void}
+ */
+@mixin keyboard-focus {
+    &:focus {
+        &.has-keyboardfocus {
+            @content;
+        }
+    }
+}
+
+
+/**
+ * Add left and right content padding (default size)
+ */
+@mixin use-side-paddings {
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+}
+
+
+/**
+ * Add left and right content padding (mobile size)
+ */
+@mixin use-mobile-side-paddings {
+    padding-left: $size-content-side-space-mobile;
+    padding-right: $size-content-side-space-mobile;
+}
+
+
+/**
+ * Use default content size paddings
+ *
+* @param {boolean} $use-mobile-padding
+ * @returns {void}
+ */
+@mixin content($use-mobile-padding: false) {
+    max-width: $size-content-max;
+    margin-left: auto;
+    margin-right: auto;
+
+    @if $use-mobile-padding == true {
+        @include use-mobile-side-paddings;
+    }
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+        @include use-side-paddings;
+    }
+}
+
+
+/**
+ * Remove max-width
+ *
+ * @returns {void}
+ */
+@mixin viewport-max {
+    max-width: none;
+
+    &.u-viewport__content {
+        max-width: none;
+    }
+}
+
+
+/**
+ * Adds a line
+ *
+ * @param $color
+ * @param $width
+ * @param $size
+ * @param $height
+ * @param $position
+ *
+ * @returns {void}
+ */
+@mixin line($color, $width, $size, $height: false, $position: 'after') {
+    @if $height == false {
+        $height: $size;
+    }
+
+    &::#{$position} {
+        content: ' ';
+        border-bottom: $size solid $color;
+        width: $width;
+        max-width: 100%;
+        display: block;
+        height: $height;
+        @content;
+    }
+}
+
+
+/**
+ * Adds a before element that will guarantee the defined aspect ration on a block element
+ *
+ * @param $width
+ * @param $height
+ */
+@mixin maintain-aspect-ratio($width, $height) {
+
+    &::before {
+        content: '';
+        display: block;
+        padding-top: ($height / $width) * 100%;
+        width: 100%;
+    }
+}
+
+
+/**
+ * wraps element in brackets
+ */
+@mixin wrap-brackets {
+    display: inline-flex;
+
+    &::before {
+        content: '(';
+    }
+
+    &::after {
+        content: ')';
+    }
+}
+
+
+@mixin shim-colors($selector: '.is-opened') {
+    $shim-opacity: 0.8;
+
+    background-color: $color-anthracite-a5;
+    transition: opacity .4s ease-out;
+
+    @if ($selector != false) {
+        opacity: 0;
+
+        #{$selector} & {
+            opacity: $shim-opacity;
+        }
+    } @else {
+        opacity: $shim-opacity;
+    }
+}
+
+
+/**
+ * shim style
+ */
+@mixin shim {
+    @include shim-colors('.is-opened');
+
+    height: 0;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    left: 0;
+
+    .is-opened & {
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        z-index: $z-index-header-shim;
+    }
+}
+
+
+/**
+ * top indent for content blocks
+ */
+@mixin top-indent {
+    @include content;
+    position: relative;
+    margin-top: 0;
+
+    @include use-breakpoint(tablet, above) {
+        margin-top: -100px;
+    }
+}
+
+
+/**
+ * Clear floats after module
+ */
+@mixin clearfix {
+    &::after {
+        clear: both;
+        content: '';
+        display: table;
+    }
+}
+
+/**
+ * Clear floats before module
+ */
+@mixin clearfix-before {
+    &::before {
+        clear: both;
+        content: '';
+        display: table;
+    }
+}
+
+
+/**
+ * Adds a pseudo after element with shadow at the bottom of the current module
+ */
+@mixin content-shadow {
+    &::after {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        content: ' ';
+        display: table;
+        box-shadow: 0 0 7px 0 $color-grey-shadow;
+        height: 8px;
+        z-index: $z-index-shadow;
+        transform: translateY(-8px);
+    }
+}
+
+
+/**
+ * Adds a pseudo before element with shadow at the top of the current module
+ */
+@mixin content-shadow-top {
+    &::before {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        content: ' ';
+        display: table;
+        box-shadow: 0 3px 6px -2px $color-grey-shadow;
+        height: 8px;
+        z-index: 19;
+        transform: translateY(-58px);
+
+        @include use-breakpoint(mini-tablet, above) {
+            transform: translateY(-108px);
+        }
+    }
+}
+
+
+/**
+ * Hides the shadow pseudo-before-element and removes the top border from the current element
+ * It is used in case there should not be a shadow between two modules without highlight
+ */
+@mixin hide-content-shadow-top {
+    border-top: 0;
+
+    &::before {
+        display: none;
+    }
+}
+
+
+/**
+ * Covers the pseudo-before-element with shadow of a descending module up
+ * Is applied to the element before the module with content-shadow-top
+ * It is used on modules which contain and end with a highlight and are followed by another highlight module
+ */
+@mixin content-shadow-coverup {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: $color-white-w1;
+    z-index: #{$z-index-shadow + 10};
+}
+
+
+/**
+ * Hide element but make it still accessible for screen readers
+ */
+@mixin hidden-accessible {
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    left: -10000px;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+/**
+ * Select last row in unbalanced grid
+ *
+ * @param {number} $columns
+ * @returns {void}
+ */
+@mixin select-last-row($columns) {
+
+    &:nth-child(#{$columns}n+1) {
+        &:nth-last-child(-n+#{$columns}),
+        &:nth-last-child(-n+#{$columns}) ~ * {
+            @content;
+        }
+    }
+}
+
+
+/**
+ * Targets only Internet Explorer 11
+ */
+@mixin ie11 {
+    // sass-lint:disable-all
+    _:-ms-fullscreen &,
+    :root & {
+        @content;
+    }
+    // sass-lint:enable-all
+}
+
+
+/**
+ * calculate Highlighted Background
+ */
+@mixin highlight-background($pos-left: 0%, $pos-right: 0%) {
+    $left-padding: $pos-left / 1%; /* strip %-units */
+    $right-padding: $pos-right / 1%; /* strip %-units */
+    $total-width: 100 - ($left-padding + $right-padding); /* total width of content */
+    left: auto /* reset left from mobile */;
+    right: calc((((100% * (#{$right-padding} * -1)) + ((100% * 50))) / #{$total-width}) - 50vw);
+    width: 100vw;
+}
+
+
+/**
+ * Remove the unit of a length
+ * https://css-tricks.com/snippets/sass/strip-unit-function/
+ * @param {Number} $number - Number to remove unit from
+ * @return {Number} - Unitless number
+ */
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+    @return $number;
+}
+
+
+/**
+ * use for different colors and others styles within a module controlled by a 'is-bereich-class'
+ *
+ * @param {string} $mapname - name of the Mapping within the module
+ * @param {string} $props - css properties within the Map
+ */
+@mixin use-bereich-styles($mapname, $props) {
+    $hasDefault: false !default;
+
+    @each $key, $value in $mapname {
+
+        $clustervalues: map-get($bereich-styles-cluster, $value);
+
+        @if $key == 'default' {
+            @each $prop in $props {
+                @if map-has-key($clustervalues, $prop) {
+                    #{$prop}: map-get($clustervalues, $prop);
+                }
+            }
+            $hasDefault: true;
+        }
+        @else {
+            .is-bereich-#{$key} & {
+                @each $prop in $props {
+                    @if map-has-key($clustervalues, $prop) {
+                        #{$prop}: map-get($clustervalues, $prop);
+                    }
+                }
+            }
+        }
+    }
+    @if $hasDefault != true {
+        @warn "Default Cluster is missing. --> #{$mapname}";
+    }
+
+}
+
+@mixin has-icon {
+    position: relative;
+    padding-left: 1.1em;
+}

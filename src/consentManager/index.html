@@ -1,0 +1,104 @@
+<div id="__tealiumGDPRecModal" class="g-consentmanager"
+  data-consentsettingssavedcookiename="{{consentSettingsSavedCookieName}}" data-delayedselectionenabled="true"
+  role="dialog" aria-labelledby="g-consentmanager__headline" aria-describedby="g-consentmanager__introtext">
+  <div class="g-consentmanager__content" tabindex="-1">
+    <img aria-hidden="true" class="g-consentmanager__logo" alt="Logo"
+      src="https://www.tk.de/blueprint/static/assets/base/images/logo_Sonderform.svg#icon">
+    <h2 class="e-headline e-headline--h2 g-consentmanager__headline" id="g-consentmanager__headline">
+      {{headline}}
+    </h2>
+    <div id="g-consentmanager__introtext" class="m-richtext g-consentmanager__introtext">
+      {{introtext}}
+    </div>
+    <div id="m-togglebutton-17" class="m-togglebutton g-consentmanager__toggle-details" data-is-active="false"
+      data-text-active="{{btnToggleDetailsHide}}" data-text-inactive="{{btnToggleDetailsShow}}">
+      <a href="javascript:;" title="{{btnToggleDetailsShow}}"
+        class="e-link e-link--internal  e-link--icon m-togglebutton__link" role="switch" aria-checked="false">
+        <span class="e-link__title">
+          {{btnToggleDetailsShow}}
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          class="e-icon e-icon--text e-icon--iefix g-consentmanager__confirm-selection__icon" focusable="false"
+          style="width: 14px;">
+          <symbol id="icon" viewBox="0 0 13 24">
+            <polygon points="2,21.37 9.71,12 2.01,2.67 2.78,2.03 11.01,12 2.77,22 " opacity="0.3" />
+            <polygon points="9.71,12 2.01,2.67 2.78,2.03 11.01,12 2.77,22 2,21.37" stroke-width="0" />
+          </symbol>
+          <use xlink:href="#icon" />
+        </svg>
+      </a>
+      <label for="m-togglebutton-17" class="m-togglebutton__label">{{btnToggleDetailsLabel}}</label>
+    </div>
+    <div class="g-consentmanager__settings">
+      <div class="e-checkbox g-consentmanager__setting">
+        <input class="e-checkbox__input " type="checkbox" id="checkbox-19" aria-describedby="g-consentmanager-18"
+          checked="checked" disabled="disabled" value="">
+        <label for="checkbox-19" class="e-checkbox__label ">{{mandatoryDisplayNameRequired}}</label>
+      </div>
+      <div class="g-consentmanager__setting-description-wrapper">
+        <p id="g-consentmanager-18" class="e-text g-consentmanager__setting-description">
+          {{mandatoryDescriptionTextRequired}}
+        </p>
+      </div>
+      <div class="e-checkbox g-consentmanager__setting">
+        <input class="e-checkbox__input " type="checkbox" id="checkbox-21" data-optional="true"
+          data-tealiumcategoryname="personalization"
+          data-consentcookiename="{{optionalCategoriesCookieNamePersonalization}}"
+          aria-describedby="g-consentmanager-20" {{optionalCategoriesPreselectedPersonalization}} value="">
+        <label for="checkbox-21" class="e-checkbox__label ">{{optionalCategoriesDisplayNamePersonalization}}</label>
+      </div>
+      <div class="g-consentmanager__setting-description-wrapper">
+        <p id="g-consentmanager-20" class="e-text g-consentmanager__setting-description">
+          {{optionalCategoriesDescriptionTextPersonalization}}
+        </p>
+      </div>
+      <div class="e-checkbox g-consentmanager__setting">
+        <input class="e-checkbox__input " type="checkbox" id="checkbox-23" data-optional="true"
+          data-tealiumcategoryname="{{optionalCategoriesTealiumCategoryNameAnalytics}}"
+          data-consentcookiename="{{optionalCategoriesCookieNameAnalytics}}" aria-describedby="g-consentmanager-22"
+          {{optionalCategoriesPreselectedAnalytics}} value="">
+        <label for="checkbox-23" class="e-checkbox__label ">{{optionalCategoriesDisplayNameAnalytics}}</label>
+      </div>
+      <div class="g-consentmanager__setting-description-wrapper">
+        <p id="g-consentmanager-22" class="e-text g-consentmanager__setting-description">
+          {{optionalCategoriesDescriptionTextAnalytics}}
+        </p>
+      </div>
+      <div class="e-checkbox g-consentmanager__setting">
+        <input class="e-checkbox__input " type="checkbox" id="checkbox-25" data-optional="true"
+          data-tealiumcategoryname="{{optionalCategoriesTealiumCategoryNameEngagement}}"
+          data-consentcookiename="{{optionalCategoriesCookieNameEngagement}}" aria-describedby="g-consentmanager-24"
+          {{optionalCategoriesPreselectedEngagement}} value="">
+        <label for="checkbox-25" class="e-checkbox__label ">{{optionalCategoriesDisplayNameEngagement}}</label>
+      </div>
+      <div class="g-consentmanager__setting-description-wrapper">
+        <p id="g-consentmanager-24" class="e-text g-consentmanager__setting-description">
+          {{optionalCategoriesDescriptionTextEngagement}}
+        </p>
+      </div>
+    </div>
+    <div class="g-consentmanager__buttons">
+      <a href="javascript:;" title="{{btnConfirmselectionLabel}}"
+        class="e-link e-link--internal e-link--hoverunderline e-link--icon g-consentmanager__confirm-selection">
+        <span class="e-link__title">
+          {{btnConfirmselectionLabel}}
+        </span>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+          class="e-icon e-icon--text e-icon--iefix g-consentmanager__confirm-selection__icon" focusable="false"
+          style="width: 14px;">
+          <symbol id="icon" viewBox="0 0 13 24">
+            <polygon points="2,21.37 9.71,12 2.01,2.67 2.78,2.03 11.01,12 2.77,22 " opacity="0.3" />
+            <polygon points="9.71,12 2.01,2.67 2.78,2.03 11.01,12 2.77,22 2,21.37" stroke-width="0" />
+          </symbol>
+          <use xlink:href="#icon" />
+        </svg>
+      </a>
+      <a class="e-cta e-cta--primary e-cta--s e-cta--dark e-cta--noicon  g-consentmanager__confirm-all"
+        href="javascript:;" target="_self">
+        <span class="e-cta__text">
+          {{btnSelectallLabel}}
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

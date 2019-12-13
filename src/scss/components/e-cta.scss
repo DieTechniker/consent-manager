@@ -1,0 +1,679 @@
+/**
+ * Base settings -----------------------------------------------
+ */
+
+$e-cta-icon-size-m: 65px;
+$e-cta-icon-size-s: 55px;
+$e-cta-icon-size-mobile: 50px;
+$e-cta-icon-size-complex-m: 75px;
+$e-cta-icon-size-complex-s: 65px;
+$e-cta-icon-size-complex-mobile: 60px;
+
+/**
+ * Base styles -------------------------------------------------
+ */
+
+.e-cta {
+    @include hover {
+        &:not(.has-keyboardfocus) {
+            outline: 0;
+        }
+
+        .e-cta__text {
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
+    display: inline-block;
+    text-align: left;
+    position: relative;
+    text-decoration: none;
+    transition: width 0.6s;
+    transition-property: color, background-color, border-color, width;
+    transition-duration: 0.6s;
+    margin: 0 -3px 1px 0;
+    cursor: pointer;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+}
+
+
+.e-cta__text {
+    @include use-text('t4');
+    @include line(transparent, 0, 2px, 2px) {
+        transition: width $expo-tween-t1-time $expo-tween-t1;
+    }
+
+    display: inline-block;
+    line-height: 1.2;
+    position: relative;
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+        white-space: normal;
+    }
+}
+
+.e-cta__icon-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+}
+
+.e-cta__icon-container--secondary {
+    left: 0;
+}
+
+.e-cta__icon {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 32px;
+}
+
+/**
+ * Mobile m and s styles -------------------------------------------------
+ */
+.e-cta--s,
+.e-cta--m {
+    .e-cta__text {
+        padding: 14px 20px 10px;
+    }
+
+    .e-cta__icon-container {
+        width: $e-cta-icon-size-mobile;
+    }
+
+    &.e-cta--icon {
+        min-width: $e-cta-icon-size-mobile;
+        min-height: $e-cta-icon-size-mobile;
+
+        .e-cta__text {
+            margin-right: $e-cta-icon-size-mobile;
+            padding-right: 0;
+        }
+    }
+
+    &.e-cta--icon-secondary {
+        .e-cta__text {
+            margin-left: $e-cta-icon-size-complex-mobile; // secondary icon is always complext
+            padding-left: 0;
+        }
+    }
+
+    &.e-cta--icon-complex {
+        &.e-cta--icon {
+            .e-cta__text {
+                margin-right: $e-cta-icon-size-complex-mobile;
+                padding-right: 0;
+            }
+
+            .e-cta__icon-container {
+                width: $e-cta-icon-size-complex-mobile;
+            }
+
+            &.e-cta--left {
+                .e-cta__text {
+                    margin-right: 0;
+                    margin-left: $e-cta-icon-size-complex-mobile;
+                }
+                &.e-cta--icon-secondary {
+                    .e-cta__text {
+                        margin-right: $e-cta-icon-size-complex-mobile;
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &.e-cta--left {
+        &.e-cta--icon {
+            .e-cta__text {
+                margin-right: 0;
+                margin-left: $e-cta-icon-size-mobile;
+                padding-right: 20px;
+                padding-left: 0;
+            }
+        }
+        .e-cta__icon-container {
+            right: auto;
+            left: 0;
+        }
+
+        .e-cta__icon-container--secondary {
+            left: auto;
+            right: 0;
+        }
+        &.e-cta--icon-secondary {
+            .e-cta__text {
+                margin-right: $e-cta-icon-size-complex-mobile; // secondary icon is always complext
+                padding-right: 0;
+            }
+        }
+    }
+}
+
+/**
+ * M styles -------------------------------------------------
+ */
+
+.e-cta--m {
+    @include use-breakpoint($breakpoint-navigation, above) {
+        .e-cta__text {
+            padding: 22px 30px 18px;
+        }
+
+        .e-cta__icon-container {
+            width: $e-cta-icon-size-m;
+        }
+
+        &.e-cta--icon {
+            min-width: $e-cta-icon-size-m;
+            min-height: $e-cta-icon-size-m;
+
+            .e-cta__text {
+                margin-right: $e-cta-icon-size-m;
+                padding-right: 0;
+            }
+        }
+
+        &.e-cta--icon-secondary {
+            .e-cta__text {
+                margin-left: $e-cta-icon-size-complex-m; // secondary icon is always complext
+            }
+        }
+
+        &.e-cta--left {
+            &.e-cta--icon {
+                .e-cta__text {
+                    margin-right: 0;
+                    margin-left: $e-cta-icon-size-m;
+                    padding-left: 0;
+                }
+            }
+
+            &.e-cta--icon-secondary {
+                .e-cta__text {
+                    margin-right: $e-cta-icon-size-complex-m; // secondary icon is always complext
+                }
+            }
+        }
+
+        &.e-cta--icon-complex {
+            &.e-cta--icon {
+                &.e-cta--left {
+                    .e-cta__text {
+                        margin-right: 0;
+                        margin-left: $e-cta-icon-size-complex-m;
+                    }
+                    &.e-cta--icon-secondary {
+                        .e-cta__text {
+                            margin-right: $e-cta-icon-size-complex-m;
+                        }
+                    }
+                }
+
+                .e-cta__text {
+                    margin-right: $e-cta-icon-size-complex-m;
+                }
+
+                .e-cta__icon-container {
+                    width: $e-cta-icon-size-complex-m;
+                }
+            }
+        }
+    }
+}
+
+
+/**
+ * S styles -------------------------------------------------
+ */
+
+.e-cta--s {
+    @include use-breakpoint($breakpoint-navigation, above) {
+        .e-cta__text {
+            padding: 17px 20px 12px;
+        }
+
+        .e-cta__icon-container {
+            width: $e-cta-icon-size-s;
+        }
+
+        &.e-cta--icon {
+            min-width: $e-cta-icon-size-s;
+            min-height: $e-cta-icon-size-s;
+
+            .e-cta__text {
+                margin-right: $e-cta-icon-size-s;
+                padding-right: 0;
+            }
+        }
+
+        &.e-cta--icon-secondary {
+            .e-cta__text {
+                margin-left: $e-cta-icon-size-complex-s; // secondary icon is always complext
+            }
+        }
+
+        &.e-cta--left {
+            &.e-cta--icon {
+                .e-cta__text {
+                    margin-right: 0;
+                    margin-left: $e-cta-icon-size-s;
+                    padding-left: 0;
+                }
+            }
+            &.e-cta--icon-secondary {
+                .e-cta__text {
+                    margin-right: $e-cta-icon-size-complex-s; // secondary icon is always complext
+                }
+            }
+
+        }
+
+        &.e-cta--icon-complex {
+            &.e-cta--icon {
+                &.e-cta--left {
+                    .e-cta__text {
+                        margin-right: 0;
+                        margin-left: $e-cta-icon-size-complex-s;
+                    }
+                    &.e-cta--icon-secondary {
+                        .e-cta__text {
+                            margin-right: $e-cta-icon-size-complex-s;
+                        }
+                    }
+                }
+
+                .e-cta__text {
+                    margin-right: $e-cta-icon-size-complex-s;
+                }
+
+                .e-cta__icon-container {
+                    width: $e-cta-icon-size-complex-s;
+                }
+            }
+        }
+    }
+}
+
+
+/**
+ * xl styles -------------------------------------------------
+ */
+
+.e-cta--xl {
+    width: 100%;
+    text-align: center;
+
+    .e-cta__text {
+        padding: 16px 20px 14px;
+    }
+
+    .e-cta__icon-container {
+        display: none;
+    }
+}
+
+
+/**
+ * Primary styles -------------------------------------------------
+ */
+
+.e-cta--primary {
+    @include hover(true, true) {
+        .e-cta__text {
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
+    &.is-disabled {
+        pointer-events: none;
+    }
+}
+
+
+.e-cta--primary {
+    &.e-cta--dark {
+        @include hover {
+            color: $color-grey-g2;
+
+            .e-cta__text {
+                &::after {
+                    border-color: $color-grey-g2;
+                }
+            }
+        }
+
+        background-color: $color-anthracite-a2;
+        color: $color-grey-g2;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-grey-g2;
+            }
+        }
+
+        .e-cta__icon {
+            fill: $color-grey-g2;
+        }
+
+        &.is-disabled {
+            background-color: $color-grey-g2;
+            color: $color-grey-g1;
+
+            .e-cta__icon {
+                fill: $color-grey-g1;
+            }
+        }
+    }
+}
+
+
+.e-cta--primary {
+    &.e-cta--light {
+        @include hover {
+            color: $color-anthracite-a1;
+
+            .e-cta__text {
+                &::after {
+                    border-color: $color-anthracite-a1;
+                }
+            }
+        }
+
+        background-color: $color-grey-g2;
+        color: $color-anthracite-a2;
+
+        .e-cta__icon {
+            fill: $color-anthracite-a2;
+        }
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a2;
+            }
+        }
+
+        &.is-disabled {
+            background-color: $color-grey-g2;
+            color: $color-grey-g1;
+        }
+    }
+}
+
+
+.e-cta--primary {
+    &.e-cta--memberlight {
+        background-color: $color-neonyellow-n1;
+        color: $color-anthracite-a1;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a2;
+            }
+        }
+
+        @include hover {
+            color: $color-black-b1;
+        }
+
+        .e-cta__icon {
+            fill: $color-anthracite-a2;
+        }
+    }
+
+    &.e-cta--service {
+        background-color: $color-neonyellow-n5;
+        color: $color-anthracite-a1;
+        text-align: center;
+
+        .e-cta__text {
+            &::after {
+                border-color: transparent;
+            }
+        }
+    }
+}
+
+
+.e-cta--primary {
+    &.e-cta--memberdark {
+        background-color: $color-neonyellow-n1;
+        color: $color-anthracite-a1;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a2;
+            }
+        }
+
+        @include hover {
+            color: $color-black-b1;
+        }
+
+        .e-cta__text {
+            padding-right: 20px;
+        }
+
+        .e-cta__icon {
+            fill: $color-neonyellow-n1;
+        }
+
+        .e-cta__icon-container {
+            background-color: $color-anthracite-a2;
+        }
+    }
+}
+
+
+.e-cta--primary {
+    &.e-cta--icebluedark {
+        @include hover {
+            color: $color-iceblue-i3;
+
+            .e-cta__text {
+                &::after {
+                    border-color: $color-iceblue-i3;
+                }
+            }
+        }
+
+        background-color: $color-anthracite-a2;
+        color: $color-iceblue-i2;
+
+        .e-cta__icon {
+            fill: $color-iceblue-i2;
+        }
+
+        &.is-disabled {
+            background-color: $color-grey-g2;
+            color: $color-iceblue-i2;
+
+            .e-cta__icon {
+                fill: $color-iceblue-i2;
+            }
+        }
+    }
+}
+
+
+.e-cta--primary {
+    &.e-cta--icebluelight {
+        background-color: $color-iceblue-i2;
+        color: $color-anthracite-a2;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a2;
+            }
+        }
+    }
+}
+
+.e-cta--primary {
+    &.e-cta--jobvacancy {
+        background-color: $color-cyan-c2;
+        color: $color-white-w1;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-white-w1;
+            }
+        }
+    }
+}
+
+
+/**
+ * Secondary styles -------------------------------------------------
+ */
+
+.e-cta--secondary {
+    @include hover {
+        .e-cta__text {
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
+    &:not(.e-cta--m) {
+        .e-cta__text {
+            padding: 12px 20px 8px;
+        }
+    }
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+        &:not(.e-cta--m) {
+            .e-cta__text {
+                padding: 15px 20px 10px;
+            }
+        }
+    }
+
+    &.is-disabled {
+        pointer-events: none;
+
+        @include hover {
+            .e-cta__text {
+                &::after {
+                    width: 0;
+                }
+            }
+        }
+    }
+}
+
+
+.e-cta--secondary {
+    &.e-cta--dark {
+        background-color: transparent;
+        color: $color-anthracite-a2;
+        border: 2px solid $color-anthracite-a12;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a2;
+            }
+        }
+
+        .e-cta__icon {
+            fill: $color-anthracite-a2;
+        }
+
+        &.is-disabled {
+            border-color: $color-anthracite-a11;
+            color: $color-grey-g1;
+
+            .e-cta__icon {
+                fill: $color-anthracite-a11;
+            }
+        }
+    }
+}
+
+
+.e-cta--secondary {
+    &.e-cta--light {
+        background-color: $color-anthracite-a2;
+        color: $color-grey-g2;
+        border: 2px solid $color-grey-g2;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-grey-g2;
+            }
+        }
+
+        .e-cta__icon {
+            fill: $color-grey-g2;
+        }
+
+        &.is-disabled {
+            border-color: $color-anthracite-a11;
+            color: $color-grey-g1;
+
+            .e-cta__icon {
+                fill: $color-anthracite-a11;
+            }
+        }
+    }
+}
+
+
+.e-cta--secondary {
+    &.e-cta--icebluelight {
+        color: $color-anthracite-a2;
+        border: 2px solid $color-iceblue-i2;
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a2;
+            }
+        }
+    }
+}
+
+
+.e-cta--secondary {
+    &.e-cta--service {
+        background-color: $color-neonyellow-n7;
+        border: 2px solid $color-neonyellow-n7;
+        color: $color-anthracite-a1;
+        text-align: center;
+
+        .e-cta__text {
+            &::after {
+                border-color: transparent;
+            }
+        }
+
+        .e-cta__icon {
+            fill: $color-anthracite-a6;
+        }
+
+        .e-cta__text {
+            &::after {
+                border-color: $color-anthracite-a1;
+            }
+        }
+    }
+}
+
+
+.e-cta--external {
+    .e-cta__icon {
+        height: 26px;
+    }
+}

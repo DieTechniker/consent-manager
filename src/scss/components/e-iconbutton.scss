@@ -1,0 +1,82 @@
+
+/**
+ * Base styles -------------------------------------------------
+ */
+
+.e-iconbutton {
+    @include hover {
+        background-color: $color-anthracite-a7;
+    }
+
+    width: 40px;
+    height: 40px;
+    padding: 15px 20px;
+    text-decoration: none;
+    transition: opacity .15s ease-out, background-color .15s ease-out;
+    background-color: $color-anthracite-a11;
+    box-shadow: 0 0 5px 0 $color-grey-shadow;
+    z-index: $z-index-floating-button;
+    visibility: hidden;
+
+    &[data-is-visible='true'] {
+        visibility: visible;
+    }
+
+    &.is-hidden {
+        opacity: 0;
+        cursor: default;
+        pointer-events: none;
+    }
+
+    &:not(.has-keyboardfocus) {
+        outline: 0;
+    }
+}
+
+.e-iconbutton__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50%;
+    height: 50%;
+    fill: $color-anthracite-a1;
+    transition: left .2s ease-in-out, right .2s ease-in-out;
+
+    &--arrow-left {
+        left: 10px;
+    }
+
+    &--arrow-right,
+    &--sprungmarke {
+        right: 10px;
+    }
+
+    @include use-breakpoint(desktop, above) {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+
+.e-iconbutton__title,
+.e-iconbutton__content {
+    @include use-text(t7);
+
+    display: none;
+    padding-right: 30px;
+
+    @include use-breakpoint(desktop, above) {
+        display: block;
+
+        &.e-iconbutton__title {
+            display: inline-block;
+        }
+    }
+}
+
+
+.e-iconbutton__content {
+    @include use-font(copy-bold);
+
+    padding-top: 5px;
+}

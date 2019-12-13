@@ -1,0 +1,175 @@
+
+/**
+ * Base Colors
+ */
+$color-black-b1: #000000;
+$color-white-w1: #FFFFFF;
+
+$color-anthracite-a1: #292927;
+$color-anthracite-a2: #454542;
+$color-anthracite-a4: #60605E;
+$color-anthracite-a5: #727270;
+$color-anthracite-a6: #A09F9E;
+$color-anthracite-a7: #ECECEC;
+$color-anthracite-a8: #D9D9D9;
+$color-anthracite-a10: #C5C4C4;
+$color-anthracite-a11: #F5F5F5;
+$color-anthracite-a12: rgba(0, 0, 0, .45);
+
+$color-iceblue-i1: #849DA2;
+$color-iceblue-i2: #BEE2E9;
+$color-iceblue-i3: #D9EEF2;
+$color-iceblue-i4: #ECF6F9;
+$color-iceblue-i5: #AACAD1;
+
+$color-nightblue-n1: #004466; // nightblue-100
+$color-nightblue-n2: #4C7C94; // nightblue-70
+$color-nightblue-n3: #99B4C2; // nightblue-40
+
+$color-violet-v1: #813F90; // violet-100
+$color-violet-v2: #CCB2D3; // violet-40
+$color-violet-v3: #D9C5DD; // violet-30
+$color-violet-v4: #E6D9E9; // violet-20
+$color-violet-v5: #F2ECF3; // violet-10
+
+$color-neonyellow-n1: #E8E000; // neonyellow-100   // login
+$color-neonyellow-n2: #F4EF9B; // neonyellow-??
+$color-neonyellow-n3: #A19C00;
+$color-neonyellow-n4: #D0C900;
+$color-neonyellow-n5: #F8F5C6; // neonyellow-30    // service
+$color-neonyellow-n7: #FDFCE5; // neonyellow-10
+$color-neonyellow-n8: #F1EB83; // neonyellow-60
+$color-neonyellow-n9: #F3EF7F; // neonyellow-50
+
+$color-grey-g1: #DAD6D1;
+$color-grey-g2: #F5F2EF;
+$color-grey-g3: #F9F7F5;
+$color-grey-g4: #ECEAE8;
+
+$color-red-r1: #D01D45;
+$color-red-r2: #9B1532;
+
+$color-cyan-c1: #009EE3;
+$color-cyan-c2: #008DC9; // Use for headlines only !!!
+
+$color-petrol-p1: #006F8A; // petrol-100
+$color-petrol-p2: #4C9AAD; // petrol-70
+$color-petrol-p3: #7FB7C4; //petrol-50
+$color-petrol-p4: #99C5D0; // petrol-40
+$color-petrol-p5: #BFDBE2; // petrol-25
+$color-petrol-p6: #CCE2E8; // petrol-20
+$color-petrol-p7: #E5F0F3; // petrol-10
+$color-petrol-p8: #F2F8F9; // petrol-5
+
+/**
+ * Colors by usage
+ *
+ * -text => Foregroundcolor
+ * -back => Backgroundcolor
+ * -border => Bordercolor
+ */
+$color-wireframe: $color-grey-g2;
+
+$color-text: $color-anthracite-a2;
+
+$color-interactive-text: $color-anthracite-a2;
+$color-interactive-text-hover: $color-anthracite-a1;
+
+$color-interactive-text-light: $color-grey-g2;
+$color-interactive-text-hover-light: $color-grey-g1;
+
+/**
+ * Shadows
+ *
+ */
+$color-grey-shadow: rgba(0, 0, 0, .2);
+$color-transparent: rgba(0, 0, 0, 0);
+
+/**
+ * Color Range Concept Values and Mapping
+ */
+$bereich-styles-cluster: (
+    'style-cluster-1': (
+        /* list */
+        border-color: $color-anthracite-a8,
+        /* header */
+        background-color: $color-grey-g4,
+        /* icon */
+        color: $color-grey-g4
+    ),
+    'style-cluster-2': (
+        /* list */
+        border-color: $color-neonyellow-n5,
+        /* header */
+        background-color: $color-neonyellow-n5,
+        /* icon */
+        color:  $color-neonyellow-n5
+    ),
+    'style-cluster-3': (
+        /* list */
+        border-color: $color-iceblue-i3,
+        /* header */
+        background-color: $color-iceblue-i2,
+        /* icon */
+        color: $color-iceblue-i3
+    ),
+    'style-cluster-5': (
+        /* default grey: richtext, teaser */
+        background-color: rgba($color-anthracite-a11, .95)
+    ),
+    'style-cluster-6': (
+        /* yellow: richtext, teaser */
+        background-color: rgba($color-neonyellow-n7, .95)
+    ),
+    'style-cluster-7': (
+        /* iceblue: richtext, teaser */
+        background-color: rgba($color-iceblue-i4, .95)
+    ),
+    'style-cluster-8': (
+        /* Kunden Magazin Table */
+        /* petrol-20: table, artikelserie */
+        border-color: $color-petrol-p6,
+        /* petrol-50: table thead border bottom */
+        border-bottom-color: $color-petrol-p3,
+        border-width: 1px,
+        border-bottom: 1px solid $color-petrol-p6,
+        /* petrol-5: table thead, list */
+        color: inherit,
+        background-color: $color-petrol-p8
+    ),
+    'style-cluster-9': (
+        /* Kunden Magazin Richtext */
+        /* petrol-10: richtext, teaser, quote */
+        background-color: $color-petrol-p7,
+        /* petrol-50: richtext, list */
+        color: $color-petrol-p2
+    ),
+    'style-cluster-10': (
+        /* Kunden MGZN Table */
+        /* neonyellow-50: table, artikelserie */
+        border-color: $color-neonyellow-n9,
+        border-width: 2px,
+        border-bottom: 2px solid $color-neonyellow-n9,
+        /* petrol-100: headline h3, table caption & th */
+        color: $color-petrol-p1,
+        /* neonyellow-30: table thead, list */
+        background-color: $color-neonyellow-n5,
+        text-transform: uppercase
+    ),
+    'style-cluster-11': (
+        /* Kunden MGZN Richtext */
+        /* violet-30: richtext, teaser */
+        background-color: $color-violet-v3,
+        color: $color-white-w1,
+        text-transform: uppercase
+    ),
+    'style-cluster-12': (
+        /* Default Table */
+        /* grey: table border */
+        border-color: $color-grey-g1,
+        border-width: 1px,
+        border-bottom: 0,
+        /* grey: table head background */
+        background-color: $color-grey-g3
+    )
+);

@@ -1,0 +1,110 @@
+
+/**
+ * Base styles -------------------------------------------------
+ */
+
+.e-link,
+%e-link {
+    color: $color-interactive-text;
+    display: inline-block;
+
+    &.e-link--light {
+        @include hover {
+            color: $color-interactive-text-hover-light;
+
+            .e-link__title {
+                text-decoration: underline;
+            }
+        }
+
+        color: $color-interactive-text-light;
+
+        .e-link__title {
+            text-decoration: underline;
+        }
+
+        .e-icon--text {
+            fill: $color-interactive-text-light;
+        }
+    }
+
+    @include hover {
+        color: $color-interactive-text-hover;
+
+        .e-link__title {
+            text-decoration: underline;
+        }
+    }
+
+    &.e-link--s {
+        @include use-text(t7);
+    }
+
+    &.e-link--l {
+        @include use-text(t3);
+    }
+}
+
+.e-link {
+    &.e-link--download {
+        @include has-icon;
+        padding-left: 1.4em;
+        text-decoration: none;
+
+        .e-link--download-info {
+            white-space: nowrap;
+        }
+
+        .e-icon--text {
+            left: 0;
+            right: auto;
+            top: .3em;
+            bottom: auto;
+        }
+    }
+}
+
+
+.e-link__copy {
+    @include use-text(base);
+
+    padding-top: 10px;
+    text-decoration: none;
+}
+
+
+.e-link--icon {
+    @include has-icon;
+
+    position: relative;
+    display: inline-block;
+
+}
+
+
+.e-link--hoverunderline {
+    text-decoration: none;
+
+    .e-icon {
+        top: .3em;
+    }
+}
+
+
+.e-link--external {
+    text-decoration: none;
+    padding-left: 0;
+    padding-right: 1.4em;
+
+    .e-icon--text {
+        left: auto;
+        right: 0;
+        bottom: .3em;
+        top: auto;
+    }
+}
+
+
+.e-link--internal {
+    text-decoration: none;
+}

@@ -1,0 +1,11 @@
+.m-togglebutton[data-is-active='true'] .e-icon {
+  transition: transform $expo-tween-t1-time $expo-tween-t1;
+  transform: rotateZ(270deg);
+}
+.m-togglebutton[data-is-active='false'] .e-icon {
+  transition: transform $expo-tween-t1-time $expo-tween-t1;
+  transform: rotateZ(90deg);
+}
+.m-togglebutton__label {
+  @include hidden-accessible;
+}

@@ -1,0 +1,21 @@
+
+/**
+ * Base styles -------------------------------------------------
+ */
+
+.e-text,
+%e-text {
+    &--bold,
+    .e-text__bold,
+    b,
+    strong {
+        @include use-font(copy-bold);
+    }
+
+    &--italic,
+    .e-text__italic,
+    i,
+    em {
+        font-style: italic;
+    }
+}

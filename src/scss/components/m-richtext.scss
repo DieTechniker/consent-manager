@@ -1,0 +1,476 @@
+/**
+ * Base styles -------------------------------------------------
+ */
+
+$m-richtext-styles-mapping: (
+    'default': 'style-cluster-5',
+    'faq': 'style-cluster-6',
+    'gm': 'style-cluster-6',
+    'meinetk': 'style-cluster-7',
+    'kunden-magazin': 'style-cluster-9',
+    'kunden-mgzn': 'style-cluster-11'
+);
+
+.m-richtext {
+    &,
+    > .m-richtext__highlight {
+        @include clearfix;
+
+        > * {
+            margin-bottom: 25px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: underline;
+
+            &.e-link {
+                text-decoration: underline;
+            }
+
+            &.e-link--external {
+                .e-icon--text {
+                    right: .35em;
+                }
+            }
+        }
+
+        > h1,
+        > h2,
+        > h3,
+        > h4,
+        > h5,
+        > h6 {
+            margin-top: 50px;
+            color: inherit;
+        }
+
+        h2 {
+            @include use-text(h3);
+        }
+
+        h3 {
+            @include use-text(h4);
+        }
+
+        h4 {
+            @include use-text(h5);
+        }
+
+        h5 {
+            @include use-text(h5);
+        }
+
+        sub,
+        sup {
+            line-height: 1;
+        }
+
+        .e-link {
+            &.e-link--download {
+                display: inline;
+                margin-right: 4px; /* for more distance to the next word because of inline element */
+            }
+        }
+
+        // clear after multiple floating images
+        .m-artikelbild--floating + .m-artikelbild--floating {
+            + p {
+                clear: both;
+            }
+        }
+
+        .m-artikelbild--floating + p {
+            @include clearfix;
+        }
+
+        > *:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    > .m-richtext__highlight {
+        > * {
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+    }
+
+    > *:first-child {
+        margin-top: 0;
+    }
+
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}
+
+
+.m-richtext__highlight {
+    position: relative;
+    padding: 40px 0;
+    margin: 50px 0;
+    z-index: 0;
+
+    @include use-breakpoint(mini-tablet, above) {
+        padding: 50px 0;
+        margin: 50px 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @include use-bereich-styles($m-richtext-styles-mapping, ('color', 'text-transform'));
+    }
+
+    h2 {
+        .is-bereich-kunden-magazin & {
+            @include use-font(headline-medium);
+            font-size: 22px;
+
+            @include use-breakpoint($breakpoint-navigation, above) {
+                font-size: 28px;
+            }
+        }
+
+        .is-bereich-kunden-mgzn & {
+            @include use-font(headline-medium);
+            font-size: 28px;
+
+            @include use-breakpoint($breakpoint-navigation, above) {
+                font-size: 32px;
+            }
+        }
+    }
+
+    &::before {
+        @include use-bereich-styles($m-richtext-styles-mapping, ('background-color'));
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        width: auto;
+        right: -$size-content-side-space-mobile;
+        left: -$size-content-side-space-mobile;
+
+        @include use-breakpoint(mini-tablet, above) {
+            right: -$size-content-side-space;
+            left: -$size-content-side-space;
+        }
+
+        @include use-breakpoint(tablet) {
+            /* ipad air fix KAWEB-4339 */
+            @include highlight-background(7.8%, 19%);
+        }
+
+        @include use-breakpoint(desktop, above) {
+            @include highlight-background(span(2 wide), span(3 wide));
+        }
+    }
+}
+
+
+/**
+ * Article styles -------------------------------------------------
+ */
+
+.m-richtext--article {
+    margin-bottom: 40px;
+
+    .e-quote {
+        padding: 0 7%;
+        opacity: 1;
+
+        @include use-breakpoint($breakpoint-article, above) {
+            padding: 0;
+            width: 30.7%;
+            transform: translateY(100%);
+            position: absolute;
+            right: $size-content-side-space;
+            opacity: 0;
+
+            &.is-visible {
+                transition: opacity .8s ease-out, transform .8s ease-out;
+                transform: translateY(-100%);
+                opacity: 1;
+            }
+        }
+    }
+
+    // pull quote down under highlight box if the highlight is followed by it
+    // pull quote down if a table is followed by it
+    .m-richtext__highlight + .e-quote {
+        @include use-breakpoint($breakpoint-article, above) {
+            transform: translateY(200%);
+
+            &.is-visible {
+                transform: translateY(0);
+            }
+        }
+    }
+
+    .e-table {
+        transition: margin-right $expo-tween-t1-time $expo-tween-t1;
+
+        &.is-scrollable + .e-quote {
+            @include use-breakpoint($breakpoint-article, above) {
+                transform: translateY(200%);
+
+                &.is-visible {
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+
+    // add padding-top to scrollable table to add space between quote and table
+    .e-quote + .e-table {
+        &.is-scrollable {
+            @include use-breakpoint($breakpoint-article, above) {
+                margin-top: 50px;
+            }
+        }
+    }
+
+    > .m-gallery {
+        .m-artikelbild {
+            margin-bottom: 0;
+        }
+
+        .m-gallery__controls {
+            @include maintain-aspect-ratio(10, 7);
+            bottom: initial;
+
+            @include use-breakpoint(desktop, above) {
+                @include maintain-aspect-ratio(1, 1);
+            }
+        }
+    }
+
+    > .m-artikelbild {
+        &.m-artikelbild--nocropping {
+            margin-left: 0;
+        }
+    }
+
+    > .m-artikelbild--floating {
+        float: none;
+    }
+
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+        > .m-artikelbild--floating {
+            float: left;
+        }
+    }
+
+    @include use-breakpoint(tablet, above) {
+        > .m-artikelbild,
+        > .e-video,
+        > .m-gallery,
+        > .m-artikelvideo,
+        > .e-table {
+            margin-left: $content-left-exposed;
+        }
+
+        > .m-artikelbild,
+        > .m-gallery,
+        > .m-artikelvideo,
+        > .e-video {
+            &:not(.m-artikelbild--floating):not(.m-artikelbild--portrait) {
+                width: 90%;
+            }
+        }
+
+        > .e-table {
+            max-width: inherit;
+            width: initial;
+        }
+    }
+}
+
+
+/** TEMP - Remove asap */
+.u-viewport {
+    & > .m-richtext {
+        &.is-content {
+            @include content(true);
+        }
+    }
+}
+
+
+/**
+ * Introduction styles -------------------------------------------------
+ */
+.m-richtext--introduction {
+    p {
+        @include use-font(copy-bold);
+        line-height: 1.6;
+    }
+}
+
+/**
+ * Short answer styles -------------------------------------------------
+ */
+.m-richtext--shortanswer {
+    position: relative;
+    margin-left: 20px;
+
+    @include use-breakpoint(mini-tablet, above) {
+        margin-left: 0;
+    }
+
+    &::before {
+        content: '';
+        width: 6px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: -20px;
+        background-color: $color-neonyellow-n5;
+    }
+
+    p {
+        @include use-text(t2);
+        line-height: 1.4;
+
+        @include use-breakpoint(phablet, below) {
+            font-size: 17px;
+        }
+    }
+}
+
+
+/**
+ * FAQ styles -------------------------------------------------
+ */
+.m-richtext--faq {
+    @include use-breakpoint(tablet, above) {
+
+        > .m-artikelbild,
+        > .m-gallery,
+        > .m-artikelvideo,
+        > .e-video {
+            margin-left: $content-left-exposed;
+
+            &:not(.m-artikelvideo--floating):not(.m-artikelbild--floating):not(.m-artikelvideo--floatingcaption):not(.m-artikelbild--portrait) {
+                width: 90%;
+            }
+        }
+
+        > .e-table {
+            margin-left: $content-left-exposed;
+            max-width: inherit;
+            width: initial;
+        }
+    }
+}
+
+
+/**
+ * SEOText styles -------------------------------------------------
+ */
+.m-richtext__wrapper {
+    margin-top: $size-module-bottom-space-mobile;
+    margin-bottom: $size-module-last-bottom-space-mobile;
+
+    @include use-breakpoint(mini-tablet, above) {
+        margin-top: $size-module-bottom-space-desktop;
+        margin-bottom: $size-module-last-bottom-space-desktop;
+    }
+}
+
+.m-richtext--seotext {
+    @include content(true);
+    @include use-text(t6);
+    color: $color-anthracite-a5;
+
+    > h1,
+    > h2,
+    > h3,
+    > h4 {
+        @include use-text(h4);
+        margin-top: 0;
+        margin-bottom: 15px;
+    }
+}
+
+
+/**
+ * SEOText Landingpage Hero-------------------------------------------------
+ */
+.m-richtext--landingpagehero {
+    font-size: 16px;
+
+    p {
+        margin-bottom: 10px;
+    }
+
+    ul {
+        margin: 0;
+
+        li {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+    }
+}
+
+
+/**
+ * Check mark ul-------------------------------------------------
+ */
+.m-richtext--checkmarkul {
+    font-size: 18px;
+
+    >*:first-child {
+        margin-top: 0;
+    }
+
+    ul,
+    .e-list--ul {
+        li,
+        .e-list__item {
+            padding-left: 40px;
+            margin-bottom: 20px;
+            position: relative;
+
+            &::before {
+                content: '';
+                display: block;
+                width: 30px;
+                height: 30px;
+                background-image: url('https://www.tk.de/blueprint/static/assets/base/icons/check.svg');
+                background-repeat: no-repeat;
+                background-position: left center;
+                background-size: 30px;
+                background-color: transparent;
+                vertical-align: middle;
+                position: absolute;
+                top: -3px;
+                left: 0;
+            }
+        }
+    }
+}
+
+
+/**
+ * Highlight background style -------------------------------------------------
+ */
+
+.m-richtext__highlight {
+    .e-quote {
+        @include use-breakpoint($breakpoint-article, above) {
+            width: span(4 of 6 wide);
+            right: - span(5 of 6);
+        }
+    }
+}

@@ -1,0 +1,41 @@
+/**
+ * Font faces
+ */
+@font-face
+{
+    font-family: 'SoletoTK';
+    src: url('https://www.tk.de/blueprint/static/fonts/SoletoTK_W_Lt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face
+{
+    font-family: 'SoletoTK';
+    src: url('https://www.tk.de/blueprint/static/fonts/SoletoTK_W_Md.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face 
+{
+    font-family: 'SoletoTKHeadline';
+    src: url('https://www.tk.de/blueprint/static/fonts/SoletoTKHeadline_W_Lt.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face
+{
+    font-family: 'SoletoTKHeadline';
+    src: url('https://www.tk.de/blueprint/static/fonts/SoletoTKHeadline_W_Md.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}

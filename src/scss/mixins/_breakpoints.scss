@@ -1,0 +1,84 @@
+/**
+ * Breakpoints
+ *
+ * This file was generated via 'entoj scaffold breakpoint'
+ *
+ * @type {Map}
+ */
+$breakpoint-settings:
+(
+    maxcontent:
+    (
+        min-width: $size-page-max
+    ),
+
+    application:
+    (
+        min-width: 1280px
+    ),
+
+    desktop:
+    (
+        min-width: 1025px,
+        max-width: 1279px
+    ),
+
+    tablet:
+    (
+        min-width: 1024px,
+        max-width: 1024px
+    ),
+
+    mini-tablet:
+    (
+        min-width: 768px,
+        max-width: 1023px
+    ),
+
+    phablet:
+    (
+        min-width: 376px,
+        max-width: 767px
+    ),
+
+    mobile:
+    (
+        max-width: 375px
+    )
+);
+
+
+/**
+ * Encloses @content in the given breakpoint.
+ * Use $mode to configure the range of the breakpoint (above & below)
+ *
+ * @see $breakpoint-settings
+ * @param {String} $name - The name of the breakpoint. Defaults to mobile.
+ * @param {Enumeration} $mode - (above, self, below)
+ */
+@mixin use-breakpoint($name: mobile, $mode: self, $custom-settings: none) {
+    $settings: ();
+    $media-query: ();
+
+    @if ($custom-settings != none) {
+        $settings: $custom-settings;
+    } @else {
+        $settings: map-get($breakpoint-settings, $name);
+    }
+
+    @if ($mode == self) {
+        $media-query: (min-width (map-get-default($settings, min-width, 0))) (max-width (map-get-default($settings, max-width, 1600px)));
+    }
+    @if ($mode == below) {
+        $media-query: (max-width map-get-default($settings, max-width, 1600px));
+    }
+    @if ($mode == above) {
+        $media-query: (min-width map-get-default($settings, min-width, 0));
+    }
+
+    @if ($media-query) {
+        @include breakpoint($media-query) {
+            @content;
+        }
+    }
+}

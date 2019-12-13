@@ -1,0 +1,106 @@
+/**
+ * Base styles -------------------------------------------------
+ */
+
+.e-headline,
+%e-headline {
+    color: $color-text;
+}
+
+
+.e-headline--h1 {
+    @include use-text(h1);
+}
+
+
+.e-headline--h2 {
+    @include use-text(h2);
+
+    .is-bereich-kunden-magazin & {
+        @include use-font(headline-medium);
+        font-size: 24px;
+        color: $color-petrol-p2;
+
+        @include use-breakpoint($breakpoint-navigation, above) {
+            font-size: 30px;
+        }
+    }
+
+    .is-bereich-kunden-mgzn & {
+        @include use-font(headline-medium);
+        font-size: 32px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        color: $color-neonyellow-n1;
+
+        @include use-breakpoint($breakpoint-navigation, above) {
+            font-size: 38px;
+        }
+    }
+}
+
+
+.e-headline--h3 {
+    @include use-text(h3);
+
+    .is-bereich-kunden-magazin & {
+        @include use-font(headline-medium);
+        font-size: 22px;
+        color: $color-petrol-p3;
+
+        @include use-breakpoint($breakpoint-navigation, above) {
+            font-size: 28px;
+        }
+    }
+
+    .is-bereich-kunden-mgzn & {
+        @include use-font(headline-medium);
+        font-size: 28px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: $color-petrol-p2;
+
+        @include use-breakpoint($breakpoint-navigation, above) {
+            font-size: 32px;
+        }
+    }
+}
+
+
+.e-headline--h4 {
+    @include use-text(h4);
+}
+
+
+.e-headline--h5 {
+    @include use-text(h5);
+}
+
+
+.e-headline--h6 {
+    @include use-text(h6);
+}
+
+
+/**
+ * Underline styles -------------------------------------------------
+ */
+
+.e-headline--underline {
+    @include line($color-anthracite-a6, 50px, 2px) {
+        margin-top: 6px;
+    }
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+        @include line($color-anthracite-a6, 80px, 3px) {
+            margin-top: 6px;
+        }
+
+        padding-left: span(2 wide);
+        margin-bottom: 50px;
+    }
+
+    @include use-text(t6);
+
+    margin-bottom: 20px;
+}
