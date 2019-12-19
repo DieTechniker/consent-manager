@@ -123,7 +123,6 @@ export class ConsentManager {
             this.writeCssFeatures();
             this.writeJsFeatures();
 
-            this.setFocus();
             this.setGlobalOpenHandler();
             this.registerUrlHashChangeListener();
             this.enableTabTrapping();
@@ -237,6 +236,12 @@ export class ConsentManager {
         }
     }
 
+    handlePostRender() {
+        this.log('handlePostRender');
+        this.setFocus();
+        this.visualizeCheckedState();
+    }
+
     /* Protected ------------------------------------------------------------------------------- */
 
     /**
@@ -337,7 +342,6 @@ export class ConsentManager {
      */
     openConsentManager() {
         this.log('openConsentManager');
-        this.setFocus();
         // pre-select checkboxes based on the cookies that are already set
         this.elements.consentSettingCheckboxes.forEach((item) => {
             const cookieName = item.getAttribute('data-consentcookiename');
@@ -345,6 +349,7 @@ export class ConsentManager {
             item.checked = parseInt(cookieValue) === 1;
         });
         document.querySelector('body').classList.add(ConsentManager.CLASSES.BODYDISPLAYCONSENTMANAGER);
+        this.handlePostRender();
     }
 
     /**
@@ -423,5 +428,12 @@ export class ConsentManager {
         })
     }
 
+    visualizeCheckedState() {
+        this.log('visualizeCheckedState');
+        this.root.querySelectorAll('.g-consentmanager__setting input[checked]').forEach((checkbox) => {
+            this.log('visualizeCheckedState / forcing checkbox to appear as "checked"', checkbox);
+            checkbox.checked = true;
+        });
+    }
     /* Public ---------------------------------------------------------------------------------- */
 }
