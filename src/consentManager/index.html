@@ -1,5 +1,5 @@
-<div id="__tealiumGDPRecModal" class="g-consentmanager"
-  data-consentsettingssavedcookiename="{{consentSettingsSavedCookieName}}" data-delayedselectionenabled="true"
+<div id="tkConsentmanager" class="g-consentmanager"
+  data-consent-settings-saved-cookie-name="{{consent_settings_saved_cookie_name}}" data-delayedselectionenabled="true"
   role="dialog" aria-labelledby="g-consentmanager__headline" aria-describedby="g-consentmanager__introtext">
   <div class="g-consentmanager__content" tabindex="-1">
     <img aria-hidden="true" class="g-consentmanager__logo" alt="Logo"
@@ -10,12 +10,12 @@
     <div id="g-consentmanager__introtext" class="m-richtext g-consentmanager__introtext">
       {{introtext}}
     </div>
-    <div id="m-togglebutton-17" class="m-togglebutton g-consentmanager__toggle-details" data-is-active="false"
-      data-text-active="{{btnToggleDetailsHide}}" data-text-inactive="{{btnToggleDetailsShow}}">
-      <a href="javascript:;" title="{{btnToggleDetailsShow}}"
+    <div id="m-togglebutton-1" class="m-togglebutton g-consentmanager__toggle-details" data-is-active="false"
+      data-text-active="{{btn_toggle_details_hide}}" data-text-inactive="{{btn_toggle_details_show}}">
+      <a href="javascript:;" title="{{btn_toggle_details_show}}"
         class="e-link e-link--internal  e-link--icon m-togglebutton__link" role="switch" aria-checked="false">
         <span class="e-link__title">
-          {{btnToggleDetailsShow}}
+          {{btn_toggle_details_show}}
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           class="e-icon e-icon--text e-icon--iefix g-consentmanager__confirm-selection__icon" focusable="false"
@@ -27,61 +27,62 @@
           <use xlink:href="#icon" />
         </svg>
       </a>
-      <label for="m-togglebutton-17" class="m-togglebutton__label">{{btnToggleDetailsLabel}}</label>
+      <label for="m-togglebutton-1" class="m-togglebutton__label">{{btn_toggle_details_label}}</label>
     </div>
     <div class="g-consentmanager__settings">
       <div class="e-checkbox g-consentmanager__setting">
         <input class="e-checkbox__input " type="checkbox" id="checkbox-19" aria-describedby="g-consentmanager-18"
           checked="checked" disabled="disabled" value="">
-        <label for="checkbox-19" class="e-checkbox__label ">{{mandatoryDisplayNameRequired}}</label>
+        <label for="checkbox-19" class="e-checkbox__label ">{{mandatory_categories_display_name_required}}</label>
       </div>
       <div class="g-consentmanager__setting-description-wrapper">
         <p id="g-consentmanager-18" class="e-text g-consentmanager__setting-description">
-          {{mandatoryDescriptionTextRequired}}
+          {{mandatory_categories_description_text_required}}
         </p>
       </div>
       <div class="e-checkbox g-consentmanager__setting">
         <input class="e-checkbox__input " type="checkbox" id="checkbox-21" data-optional="true"
-          data-tealiumcategoryname="personalization"
-          data-consentcookiename="{{optionalCategoriesCookieNamePersonalization}}"
-          aria-describedby="g-consentmanager-20" {{optionalCategoriesPreselectedPersonalization}} value="">
-        <label for="checkbox-21" class="e-checkbox__label ">{{optionalCategoriesDisplayNamePersonalization}}</label>
+          data-tealiumcategoryname="{{optional_categories_tealium_category_name_personalization}}"
+          data-consentcookiename="{{optional_categories_cookie_name_personalization}}"
+          aria-describedby="g-consentmanager-20" {{optional_categories_preselected_personalization}} value=""
+          data-tk-features="analytics multivarianztesting personalisierung">
+        <label for="checkbox-21" class="e-checkbox__label ">{{optional_categories_display_name_personalization}}</label>
       </div>
       <div class="g-consentmanager__setting-description-wrapper">
         <p id="g-consentmanager-20" class="e-text g-consentmanager__setting-description">
-          {{optionalCategoriesDescriptionTextPersonalization}}
+          {{optional_categories_description_text_personalization}}
         </p>
       </div>
       <div class="e-checkbox g-consentmanager__setting">
         <input class="e-checkbox__input " type="checkbox" id="checkbox-23" data-optional="true"
-          data-tealiumcategoryname="{{optionalCategoriesTealiumCategoryNameAnalytics}}"
-          data-consentcookiename="{{optionalCategoriesCookieNameAnalytics}}" aria-describedby="g-consentmanager-22"
-          {{optionalCategoriesPreselectedAnalytics}} value="">
-        <label for="checkbox-23" class="e-checkbox__label ">{{optionalCategoriesDisplayNameAnalytics}}</label>
+          data-tealiumcategoryname="{{optional_categories_tealium_category_name_analytics}}"
+          data-consentcookiename="{{optional_categories_cookie_name_analytics}}" aria-describedby="g-consentmanager-22"
+          {{optional_categories_preselected_analytics}} value="" data-tk-features="marketing_analytics">
+        <label for="checkbox-23" class="e-checkbox__label ">{{optional_categories_display_name_analytics}}</label>
       </div>
       <div class="g-consentmanager__setting-description-wrapper">
         <p id="g-consentmanager-22" class="e-text g-consentmanager__setting-description">
-          {{optionalCategoriesDescriptionTextAnalytics}}
+          {{optional_categories_description_text_analytics}}
         </p>
       </div>
       <div class="e-checkbox g-consentmanager__setting">
         <input class="e-checkbox__input " type="checkbox" id="checkbox-25" data-optional="true"
-          data-tealiumcategoryname="{{optionalCategoriesTealiumCategoryNameEngagement}}"
-          data-consentcookiename="{{optionalCategoriesCookieNameEngagement}}" aria-describedby="g-consentmanager-24"
-          {{optionalCategoriesPreselectedEngagement}} value="">
-        <label for="checkbox-25" class="e-checkbox__label ">{{optionalCategoriesDisplayNameEngagement}}</label>
+          data-tealiumcategoryname="{{optional_categories_tealium_category_name_engagement}}"
+          data-consentcookiename="{{optional_categories_cookie_name_engagement}}" aria-describedby="g-consentmanager-24"
+          {{optional_categories_preselected_engagement}} value="" data-tk-features="maps">
+        <label for="checkbox-25" class="e-checkbox__label ">{{optional_categories_display_name_engagement}}</label>
       </div>
       <div class="g-consentmanager__setting-description-wrapper">
         <p id="g-consentmanager-24" class="e-text g-consentmanager__setting-description">
-          {{optionalCategoriesDescriptionTextEngagement}}
+          {{optional_categories_description_text_engagement}}
         </p>
       </div>
     </div>
     <div class="g-consentmanager__buttons">
-      <a href="javascript:;" title="{{btnConfirmselectionLabel}}"
+      <a href="javascript:;" title="{{btn_confirm_selection_label}}"
         class="e-link e-link--internal e-link--hoverunderline e-link--icon g-consentmanager__confirm-selection">
         <span class="e-link__title">
-          {{btnConfirmselectionLabel}}
+          {{btn_confirm_selection_label}}
         </span>
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           class="e-icon e-icon--text e-icon--iefix g-consentmanager__confirm-selection__icon" focusable="false"
@@ -96,7 +97,7 @@
       <a class="e-cta e-cta--primary e-cta--s e-cta--dark e-cta--noicon  g-consentmanager__confirm-all"
         href="javascript:;" target="_self">
         <span class="e-cta__text">
-          {{btnSelectallLabel}}
+          {{btn_select_all_label}}
         </span>
       </a>
     </div>

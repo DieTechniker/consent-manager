@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "parcel ./src/consentManager.html --https",
-    "build": "parcel build ./src/consentManager.html"
+    "build": "parcel build ./src/consentManager.html --no-source-maps"
   },
   "browserslist": [
     ">2%",
