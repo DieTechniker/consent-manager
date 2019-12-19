@@ -90,6 +90,10 @@ export class ConsentManager {
 
         if (window.utag && window.utag.gdpr) {
             this.categoryMap = {};
+            this.featureMap = {
+                'enabled': [],
+                'disabled': []
+            };
             const tealiumCategoryArray = window.utag.gdpr.getCategories();
             this.log('prepare / read tealium categories:', tealiumCategoryArray);
             this.delayedSelectionEnabled = !!this.root.getAttribute('data-delayedselectionenabled');
@@ -101,12 +105,24 @@ export class ConsentManager {
                 // before persisting we will be checking if a valid category was actually found
                 const tealiumCategoryIndex = tealiumCategoryArray.indexOf(tealiumCategoryName);
                 const consentCookieName = item.getAttribute('data-consentcookiename');
+                const tkFeatures = item.getAttribute('data-tkfeatures') || '';
+                const tkFeaturesArray = tkFeatures.split(',');
+                const consentGiven = getCookie(consentCookieName) === '1';
+                this.log(`prepare / cookie: ${consentCookieName} -> ${getCookie(consentCookieName)}`);
                 this.categoryMap[tealiumCategoryName] = {
                     tealiumCategoryIndex,
-                    consentCookieName
-                }
+                    consentCookieName,
+                    consentGiven,
+                    'tkFeatures': tkFeaturesArray
+                };
+                // add the features for the current category to the corresponding featureMap-entry
+                this.featureMap[(consentGiven ? 'enabled' : 'disabled')] = this.featureMap[(consentGiven ? 'enabled' : 'disabled')].concat(tkFeaturesArray);
             });
             this.log('prepare / categoryMap:', this.categoryMap);
+            this.log('prepare / featureMap:', this.featureMap);
+            this.writeCssFeatures();
+            this.writeJsFeatures();
+
             this.setFocus();
             this.setGlobalOpenHandler();
             this.registerUrlHashChangeListener();
@@ -384,6 +400,27 @@ export class ConsentManager {
     disableTabTrapping() {
         this.log('disableTabTrapping');
         document.removeEventListener('keydown', this.handleKeyDownAndTrapTabbing);
+    }
+
+    writeCssFeatures() {
+        this.log('writeCssFeatures');
+        const enabledFeatureClasses = this.featureMap.enabled.map(enabledFeature => `consent-feature_${enabledFeature.trim().toLowerCase()}-true`);
+        const disabledFeatureClasses = this.featureMap.disabled.map(disabledFeature => `consent-feature_${disabledFeature.trim().toLowerCase()}-false`);
+        document.querySelector('body').classList.add(...enabledFeatureClasses);
+        document.querySelector('body').classList.add(...disabledFeatureClasses);
+    }
+
+    writeJsFeatures() {
+        this.log('writeJsFeatures');
+        window.tk = window.tk || {};
+        window.tk.consentManager = window.tk.consentManager || {};
+        window.tk.consentManager.features = {};
+        this.featureMap.enabled.forEach(enabledFeature => {
+            window.tk.consentManager.features[`FEATURE_${enabledFeature.trim().toUpperCase()}`] = true;
+        });
+        this.featureMap.disabled.forEach(disabledFeature => {
+            window.tk.consentManager.features[`FEATURE_${disabledFeature.trim().toUpperCase()}`] = false;
+        })
     }
 
     /* Public ---------------------------------------------------------------------------------- */
