@@ -18,7 +18,8 @@
   },
   "scripts": {
     "start": "parcel ./src/consentManager.html --https",
-    "build": "parcel build ./src/consentManager.html --no-source-maps --no-minify"
+    "build": "parcel build ./src/consentManager.html --no-source-maps --no-minify",
+    "test": "parcel ./src/test.html --https --port 4321"
   },
   "browserslist": [
     ">2%",
