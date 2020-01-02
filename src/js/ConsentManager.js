@@ -236,10 +236,12 @@ export class ConsentManager {
         }
     }
 
+    /**
+     * Performs actions required after the template HTML was added to the DOM via Tealium-JS
+     */
     handlePostRender() {
         this.log('handlePostRender');
         this.setFocus();
-        this.visualizeCheckedState();
     }
 
     /* Protected ------------------------------------------------------------------------------- */
@@ -342,12 +344,7 @@ export class ConsentManager {
      */
     openConsentManager() {
         this.log('openConsentManager');
-        // pre-select checkboxes based on the cookies that are already set
-        this.elements.consentSettingCheckboxes.forEach((item) => {
-            const cookieName = item.getAttribute('data-consentcookiename');
-            const cookieValue = getCookie(cookieName);
-            item.checked = parseInt(cookieValue) === 1;
-        });
+        this.preselectCheckboxes();
         document.querySelector('body').classList.add(ConsentManager.CLASSES.BODYDISPLAYCONSENTMANAGER);
         this.handlePostRender();
     }
@@ -428,12 +425,27 @@ export class ConsentManager {
         })
     }
 
-    visualizeCheckedState() {
-        this.log('visualizeCheckedState');
-        this.root.querySelectorAll('.g-consentmanager__setting input[checked]').forEach((checkbox) => {
-            this.log('visualizeCheckedState / forcing checkbox to appear as "checked"', checkbox);
-            checkbox.checked = true;
-        });
+    /**
+     * Mark checkboxes as checked based on the cookies that are already set or if the consent-manager was never confirmed before make sure the pre-selected categories are visualized as checked.
+     */
+    preselectCheckboxes() {
+        if (!this.isConsentManagerConfirmedCookiePresent()) {
+            // Make sure the preset checked-state as defined in the utag-html is reflected in the frontend. This seems not to be the case in the default tealium implementation (where the detokenized content (dtc) is appended to the body).
+            this.root.querySelectorAll('.g-consentmanager__setting input[checked]').forEach((checkbox) => {
+                this.log('preselectCheckboxes / forcing checkbox to appear as "checked"', checkbox);
+                checkbox.checked = true;
+            });
+        }
+        else {
+            // If the consent manager was previously closed we only want to reflect the consent cookies currently being present instead.
+            this.elements.consentSettingCheckboxes.forEach((item) => {
+                const cookieName = item.getAttribute('data-consentcookiename');
+                const cookieValue = getCookie(cookieName);
+                item.checked = parseInt(cookieValue) === 1;
+            });
+        }
     }
+
+
     /* Public ---------------------------------------------------------------------------------- */
 }
