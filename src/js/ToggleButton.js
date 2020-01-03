@@ -1,11 +1,11 @@
-import { tkDebug } from "./debug";
+import { debug } from "./debug";
 
 export class ToggleButton {
     /**
      * @param {DOMElement} element
      */
     constructor(element) {
-        this.log = tkDebug('toggleButton');
+        this.log = debug('toggleButton');
         this.log('ToggleButton constructor');
 
         // Elements

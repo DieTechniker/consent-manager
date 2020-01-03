@@ -1,4 +1,7 @@
 import { ConsentManager } from "../js/ConsentManager";
+
+import '@babel/polyfill';
+
 // get the mounted element
 const consentManagerElement = document.getElementById('tkConsentmanager')
 if (!!consentManagerElement) {

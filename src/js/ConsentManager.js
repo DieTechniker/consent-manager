@@ -1,4 +1,4 @@
-import { tkDebug } from "./debug";
+import { debug } from "./debug";
 import { getCookie } from "./getCookie";
 import { handleError } from "./handleError";
 import { removeUrlHash } from './removeUrlHash';
@@ -56,19 +56,19 @@ export class ConsentManager {
      */
     constructor(element) {
         this.handleError = handleError;
-        this.log = tkDebug('consentManager');
+        this.log = debug('consentManager');
         this.log('ConsentManager constructor');
 
         // Elements
         this.root = element;
         this.elements = {};
-        this.elements.consentSettingCheckboxes = this.root.querySelectorAll('.g-consentmanager__setting input[data-optional="true"]');
-        this.elements.btnConfirmSelection = this.root.querySelectorAll('.g-consentmanager__confirm-selection');
-        this.elements.btnConfirmAll = this.root.querySelectorAll('.g-consentmanager__confirm-all');
-        this.elements.toggleDetails = this.root.querySelectorAll('.g-consentmanager__toggle-details');
-        this.elements.categoryDescriptionWrappers = this.root.querySelectorAll('.g-consentmanager__setting-description-wrapper');
-        this.elements.content = this.root.querySelectorAll('.g-consentmanager__content');
-        this.elements.toggleButton = this.root.querySelectorAll('.m-togglebutton');
+        this.elements.consentSettingCheckboxes = Array.from(this.root.querySelectorAll('.g-consentmanager__setting input[data-optional="true"]'));
+        this.elements.btnConfirmSelection = Array.from(this.root.querySelectorAll('.g-consentmanager__confirm-selection'));
+        this.elements.btnConfirmAll = Array.from(this.root.querySelectorAll('.g-consentmanager__confirm-all'));
+        this.elements.toggleDetails = Array.from(this.root.querySelectorAll('.g-consentmanager__toggle-details'));
+        this.elements.categoryDescriptionWrappers = Array.from(this.root.querySelectorAll('.g-consentmanager__setting-description-wrapper'));
+        this.elements.content = Array.from(this.root.querySelectorAll('.g-consentmanager__content'));
+        this.elements.toggleButton = Array.from(this.root.querySelectorAll('.m-togglebutton'));
 
         // Handler bindings
         this.elements.btnConfirmSelection.forEach(button => button.addEventListener('click', this.handleClickConfirmSelection.bind(this)));
@@ -150,7 +150,7 @@ export class ConsentManager {
 
     handleClickConfirmAll(e) {
         e.preventDefault();
-        const unselectedCheckboxes = this.root.querySelectorAll('.g-consentmanager__setting input[data-optional="true"]:not(:checked)');
+        const unselectedCheckboxes = Array.from(this.root.querySelectorAll('.g-consentmanager__setting input[data-optional="true"]:not(:checked)'));
         let totalTimeout = 0;
         this.log('handleClickConfirmAll / unselected checkboxes:', unselectedCheckboxes);
         unselectedCheckboxes.forEach((checkbox, index) => {
@@ -217,7 +217,7 @@ export class ConsentManager {
         const KEY_TAB = 9;
 
         if (keyDownEvent.keyCode === KEY_TAB) {
-            const tabbableElementsWithinDialog = this.root.querySelectorAll(ConsentManager.TABBABLE_ELEMENT_SELECTORS);
+            const tabbableElementsWithinDialog = Array.from(this.root.querySelectorAll(ConsentManager.TABBABLE_ELEMENT_SELECTORS));
             const firstTabbableElementWithinDialog = tabbableElementsWithinDialog[0];
             const lastTabbableElementWithinDialog = tabbableElementsWithinDialog[tabbableElementsWithinDialog.length - 1];
             const firstFocusableElementWithinDialog = this.root.querySelector(ConsentManager.FOCUSABLE_ELEMENT_SELECTORS);
@@ -406,10 +406,18 @@ export class ConsentManager {
 
     writeCssFeatures() {
         this.log('writeCssFeatures');
+
+        // polyfill for IE11
+        DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function () {
+            for (var i = 0; i < arguments.length; i++) {
+                this.add(arguments[i]);
+            }
+        }
+
         const enabledFeatureClasses = this.featureMap.enabled.map(enabledFeature => `consent-feature_${enabledFeature.trim().toLowerCase()}-true`);
         const disabledFeatureClasses = this.featureMap.disabled.map(disabledFeature => `consent-feature_${disabledFeature.trim().toLowerCase()}-false`);
-        document.querySelector('body').classList.add(...enabledFeatureClasses);
-        document.querySelector('body').classList.add(...disabledFeatureClasses);
+        document.querySelector('body').classList.addMany(...enabledFeatureClasses);
+        document.querySelector('body').classList.addMany(...disabledFeatureClasses);
     }
 
     writeJsFeatures() {
@@ -431,7 +439,7 @@ export class ConsentManager {
     preselectCheckboxes() {
         if (!this.isConsentManagerConfirmedCookiePresent()) {
             // Make sure the preset checked-state as defined in the utag-html is reflected in the frontend. This seems not to be the case in the default tealium implementation (where the detokenized content (dtc) is appended to the body).
-            this.root.querySelectorAll('.g-consentmanager__setting input[checked]').forEach((checkbox) => {
+            Array.from(this.root.querySelectorAll('.g-consentmanager__setting input[checked]')).forEach((checkbox) => {
                 this.log('preselectCheckboxes / forcing checkbox to appear as "checked"', checkbox);
                 checkbox.checked = true;
             });
