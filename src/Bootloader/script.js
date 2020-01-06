@@ -10,6 +10,21 @@
         // * this will not(!) show any consent manager to the user
         utag.gdpr.showConsentPreferences();
     } else {
-        console.error("could not find function utag.gdpr.showConsentPreferences() in order to initialize the tealium consent-manager")
+        console.log("utag.gdpr.showConsentPreferences is not available - setting all features (CSS / JS) to true");
+
+        // write JS-feature map
+        window.tk = window.tk || {};
+        window.tk.consentManager = window.tk.consentManager || {};
+        window.tk.consentManager.features = { FEATURE_ANALYTICS: true, FEATURE_MULTIVARIANZTESTING: true, FEATURE_PERSONALISIERUNG: true, FEATURE_MARKETING_ANALYTICS: true, FEATURE_MAPS: true };
+
+        // write CSS-body classes
+        // polyfill for IE11
+        DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function () {
+            for (var i = 0; i < arguments.length; i++) {
+                this.add(arguments[i]);
+            }
+        }
+        const enabledFeatureClasses = ["consent-feature_analytics-true", "consent-feature_multivarianztesting-true", "consent-feature_personalisierung-true", "consent-feature_marketing_analytics-true", "consent-feature_maps-true"]
+        document.querySelector('body').classList.addMany(...enabledFeatureClasses);
     }
 })()
