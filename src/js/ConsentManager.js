@@ -1,33 +1,33 @@
 import { debug } from "./debug";
 import { getCookie } from "./getCookie";
 import { handleError } from "./handleError";
+import { outerHeight } from "./outerHeight";
 import { removeUrlHash } from './removeUrlHash';
 import { setCookie as setCookieUtil } from "./setCookie";
-import { outerHeight } from "./outerHeight";
 import { ToggleButton } from "./ToggleButton";
 
 export class ConsentManager {
     /* Constants ------------------------------------------------------------------------------- */
-    /**
-     * @property {String}
-     */
     static get CLASSES() {
         return {
             "BODYDISPLAYCONSENTMANAGER": "is-display-consentmanager",
-            "ROOTSHOWDETAILS": "g-consentmanager--show-details"
+            "ROOTSHOWDETAILS": "g-consentmanager--show-details",
+            "SETTING": "g-consentmanager__setting",
+            "SETTINGHIGHLIGHT": "g-consentmanager__setting--highlight",
+            "COMPONENTHASHIGHLIGHT": "g-consentmanager--has-highlighted-elements"
         };
     }
 
     static get OPENTRIGGERHASH() {
-        return 'openconsentmanager';
+        return "openconsentmanager";
     }
 
     static get ROOTCLASSDISPLAYCONSENTMANAGER() {
-        return 'is-display-consentmanager';
+        return "is-display-consentmanager";
     }
 
     static get TABBABLE_ELEMENT_SELECTORS() {
-        return 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, [contenteditable]';
+        return "a[href]:not([aria-hidden=true]), area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, [contenteditable]";
     }
 
     static get FOCUSABLE_ELEMENT_SELECTORS() {
@@ -35,11 +35,11 @@ export class ConsentManager {
     }
 
     static get COOKIEVALIDITY() {
-        return '2147483647'; // maximum cookie-validity in days compatible with 32-bit systems 2147483647 = 2^31 = ~year 2038
+        return "2147483647"; // maximum cookie-validity in days compatible with 32-bit systems 2147483647 = 2^31 = ~year 2038
     }
 
     static get ACTIONTRACKING_PREFIX() {
-        return 'consentmanager_';
+        return "consentmanager_";
     }
 
     static get DELAY() {
@@ -62,10 +62,12 @@ export class ConsentManager {
         // Elements
         this.root = element;
         this.elements = {};
-        this.elements.consentSettingCheckboxes = Array.from(this.root.querySelectorAll('.g-consentmanager__setting input[data-optional="true"]'));
+        this.elements.consentSettingCheckboxes = Array.from(this.root.querySelectorAll('.e-checkbox__input[data-optional="true"]'));
         this.elements.btnConfirmSelection = Array.from(this.root.querySelectorAll('.g-consentmanager__confirm-selection'));
         this.elements.btnConfirmAll = Array.from(this.root.querySelectorAll('.g-consentmanager__confirm-all'));
+        this.elements.btnClose = Array.from(this.root.querySelectorAll('.g-consentmanager__close'));
         this.elements.toggleDetails = Array.from(this.root.querySelectorAll('.g-consentmanager__toggle-details'));
+        this.elements.settingItems = Array.from(this.root.querySelectorAll('.g-consentmanager__setting'));
         this.elements.categoryDescriptionWrappers = Array.from(this.root.querySelectorAll('.g-consentmanager__setting-description-wrapper'));
         this.elements.content = Array.from(this.root.querySelectorAll('.g-consentmanager__content'));
         this.elements.toggleButton = Array.from(this.root.querySelectorAll('.m-togglebutton'));
@@ -73,6 +75,7 @@ export class ConsentManager {
         // Handler bindings
         this.elements.btnConfirmSelection.forEach(button => button.addEventListener('click', this.handleClickConfirmSelection.bind(this)));
         this.elements.btnConfirmAll.forEach(button => button.addEventListener('click', this.handleClickConfirmAll.bind(this)));
+        this.elements.btnClose.forEach(button => button.addEventListener('click', this.handleClickClose.bind(this)));
         this.elements.toggleDetails.forEach(button => {
             new ToggleButton(button);
             button.addEventListener('click', this.handleClickToggleDetails.bind(this))
@@ -169,6 +172,12 @@ export class ConsentManager {
         }, this.delayedSelectionEnabled ? totalTimeout + ConsentManager.DELAY.FINAL : 0);
     }
 
+    handleClickClose(e) {
+        e.preventDefault();
+        this.log('handleClickClose');
+        this.closeConsentManager();
+    }
+
     handleClickToggleDetails(e) {
         e.preventDefault();
         const currentState = this.root.classList.contains(ConsentManager.CLASSES.ROOTSHOWDETAILS);
@@ -215,14 +224,17 @@ export class ConsentManager {
      */
     handleKeyDownAndTrapTabbing(keyDownEvent) {
         const KEY_TAB = 9;
-
+        this.log('handleKeyDownAndTrapTabbing');
         if (keyDownEvent.keyCode === KEY_TAB) {
             const tabbableElementsWithinDialog = Array.from(this.root.querySelectorAll(ConsentManager.TABBABLE_ELEMENT_SELECTORS));
             const firstTabbableElementWithinDialog = tabbableElementsWithinDialog[0];
             const lastTabbableElementWithinDialog = tabbableElementsWithinDialog[tabbableElementsWithinDialog.length - 1];
             const firstFocusableElementWithinDialog = this.root.querySelector(ConsentManager.FOCUSABLE_ELEMENT_SELECTORS);
 
-            this.log('handleKeyDownAndTrapTabbing / activeElement:', document.activeElement, firstFocusableElementWithinDialog);
+            this.log('handleKeyDownAndTrapTabbing / activeElement:', document.activeElement);
+            this.log('handleKeyDownAndTrapTabbing / firstFocusableElementWithinDialog:', firstFocusableElementWithinDialog);
+            this.log('handleKeyDownAndTrapTabbing / lastTabbableElementWithinDialog:', lastTabbableElementWithinDialog);
+            this.log('handleKeyDownAndTrapTabbing / tabbableElementsWithinDialog:', tabbableElementsWithinDialog);
 
             if (keyDownEvent.shiftKey && document.activeElement === firstTabbableElementWithinDialog || keyDownEvent.shiftKey && document.activeElement === firstFocusableElementWithinDialog) {
                 keyDownEvent.preventDefault();
@@ -241,7 +253,7 @@ export class ConsentManager {
      */
     handlePostRender() {
         this.log('handlePostRender');
-        this.setFocus();
+        this.focusFirstElement();
     }
 
     /* Protected ------------------------------------------------------------------------------- */
@@ -253,13 +265,13 @@ export class ConsentManager {
      */
     setCookie(name, value) {
         this.log(`setCookie / name: ${name}, value: ${value}`);
-        setCookieUtil(name, value, ConsentManager.COOKIEVALIDITY);
+        setCookieUtil(name, value, ConsentManager.COOKIEVALIDITY, true, false);
     }
 
     /**
      * Sets the focus to the first focusable element within the consent-manager overlay
      */
-    setFocus() {
+    focusFirstElement() {
         const firstFocusableElement = this.root.querySelector(ConsentManager.FOCUSABLE_ELEMENT_SELECTORS);
         this.log(`setFocus / firstFocusableElement: `, firstFocusableElement);
         firstFocusableElement.focus();
@@ -325,9 +337,10 @@ export class ConsentManager {
             this.log('closeConsentManager / removing hash that triggered opening');
             removeUrlHash();
         }
-
         document.querySelector('body').classList.remove(ConsentManager.CLASSES.BODYDISPLAYCONSENTMANAGER);
         this.disableTabTrapping();
+        this.disableHighlighting();
+        this.disableCloseButton();
     }
 
     /**
@@ -341,12 +354,42 @@ export class ConsentManager {
 
     /**
      * Adds the body-class which is causing the component to display
+     * Example for querying categories:
+     * openConsentManager({requestCategories = ['category_nutzergerechte_gestaltung', 'category_wirtschaftlicher_werbeeinsatz']})
      */
-    openConsentManager() {
-        this.log('openConsentManager');
+    openConsentManager(params = { requestCategories: [] }) {
+        this.log(`openConsentManager / params: `, params);
+        this.handleAdditionalFeatureAndCategoryRequests(params);
+        // the additional features must be done before the focussing takes place - the close button might not always be present
+        this.focusFirstElement();
+        // pre-select checkboxes based on the cookies that are already set
         this.preselectCheckboxes();
         document.querySelector('body').classList.add(ConsentManager.CLASSES.BODYDISPLAYCONSENTMANAGER);
         this.handlePostRender();
+    }
+
+    handleAdditionalFeatureAndCategoryRequests(params = { requestCategories: [] }) {
+        this.log(`highlightRequestedElements / params: `, params);
+        let categoriesSelectorArray = [];
+        let featuresSelectorArray = [];
+        if (params.requestCategories && params.requestCategories.length > 0) {
+            categoriesSelectorArray = params.requestCategories.map(category => `[data-tkcategoryenumvalue=${category.toUpperCase()}]`);
+        }
+        const selector = [...categoriesSelectorArray, ...featuresSelectorArray].join(', ');
+        this.log(`highlightRequestedElements / selector: `, selector);
+        if (selector) {
+            const elementsToBeHighlighted = Array.from(this.root.querySelectorAll(selector));
+            if (elementsToBeHighlighted.length > 0) {
+                this.log(`highlightRequestedElements / elementsToBeHighlighted: `, elementsToBeHighlighted);
+                elementsToBeHighlighted.forEach(item => {
+                    item.closest(`.${Component.CLASSES.SETTING}`).classList.add(Component.CLASSES.SETTINGHIGHLIGHT);
+                });
+                this.enableHighlighting();
+                this.enableCloseButton();
+            } else {
+                this.log(`highlightRequestedElements / no elements found to be highlighted`);
+            }
+        }
     }
 
     /**
@@ -389,8 +432,8 @@ export class ConsentManager {
         this.log('setGlobalOpenHandler');
         window.tk = window.tk || {};
         window.tk.consentManager = window.tk.consentManager || {};
-        window.tk.consentManager.openConsentManager = () => {
-            this.openConsentManager();
+        window.tk.consentManager.openConsentManager = (params) => {
+            this.openConsentManager(params);
         }
     }
 
@@ -454,6 +497,28 @@ export class ConsentManager {
         }
     }
 
+    enableHighlighting() {
+        this.log('enableHighlighting');
+        this.root.classList.add(ConsentManager.CLASSES.COMPONENTHASHIGHLIGHT);
+    }
+
+    disableHighlighting() {
+        this.log('disableHighlighting');
+        this.settingItems.forEach(settingItem => {
+            settingItem.classList.remove(ConsentManager.CLASSES.COMPONENTHASHIGHLIGHT);
+        })
+        this.root.classList.remove(ConsentManager.CLASSES.COMPONENTHASHIGHLIGHT);
+    }
+
+    enableCloseButton() {
+        this.log('enableCloseButton');
+        this.btnClose.setAttribute('aria-hidden', false);
+    }
+
+    disableCloseButton() {
+        this.log('disableCloseButton');
+        this.btnClose.setAttribute('aria-hidden', true);
+    }
 
     /* Public ---------------------------------------------------------------------------------- */
 }

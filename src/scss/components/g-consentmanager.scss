@@ -1,5 +1,14 @@
+$highlight-vertical-offset: 10px;
+$highlight-border-width: 3px;
 $buttons-assumed-max-height: 150px;
 $logo-mobile-size: 65px;
+
+.g-consentmanager {
+  box-sizing: border-box;
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }  
+}
 
 .g-consentmanager {
   // Wenn sich etwas an der grundlegenden Anzeige des Consent-Managers ändern sollte, muss dies bitte auch im <noscript> des Templates zurückgesetzt werden.
@@ -29,13 +38,32 @@ body.is-display-consentmanager .g-consentmanager {
 
   @include use-breakpoint($breakpoint-navigation, above) {
     align-items: center;
+    padding: 30px 0 0 0; // make rooom for the button sticking half way out of the box
   }
   @include ie11 {
     display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+
+.g-consentmanager__content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+
+  @include ie11 {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 768px;
   }
 }
 
 .g-consentmanager__content {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -43,13 +71,16 @@ body.is-display-consentmanager .g-consentmanager {
   max-height: 100%;
   background-color: $color-white-w1;
   padding-top: $logo-mobile-size + 20px; // make some room for the logo
-  padding-left: $size-content-side-space-mobile;
-  padding-right: $size-content-side-space-mobile;
-  overflow: auto;
+  //padding-left: $size-content-side-space-mobile;
+  //padding-right: $size-content-side-space-mobile;
+
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @include use-breakpoint($breakpoint-navigation, above) {
-    padding: $size-content-side-space;
+    padding-top: $size-content-side-space;
   }
+
   @include ie11 {
     display: block;
     margin-left: 50%;
@@ -60,28 +91,35 @@ body.is-display-consentmanager .g-consentmanager {
   }
 }
 
-.g-consentmanager__logo {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 6vw;
-  width: $logo-mobile-size;
-  height: auto;
-  @include use-breakpoint($breakpoint-navigation, above) {
-    display: none;
-  }
-}
-
 .g-consentmanager__headline {
   margin-bottom: 20px;
+  padding-left: $size-content-side-space-mobile;
+  padding-right: $size-content-side-space-mobile;
+  @include use-breakpoint($breakpoint-navigation, above) {
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+  }
+
 }
 
 .g-consentmanager__introtext {
   margin-bottom: 20px;
+  padding-left: $size-content-side-space-mobile;
+  padding-right: $size-content-side-space-mobile;
+  @include use-breakpoint($breakpoint-navigation, above) {
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+  }
 }
 
 .g-consentmanager__settings {
   margin-bottom: 20px;
+  padding-left: $size-content-side-space-mobile;
+  padding-right: $size-content-side-space-mobile;
+  @include use-breakpoint($breakpoint-navigation, above) {
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+  }
   @include ie11 {
     display: block;
     clear: both;
@@ -99,9 +137,12 @@ body.is-display-consentmanager .g-consentmanager {
   left: 0;
   right: 0;
   width: 100%;
-  min-height: 130px; // fixing collapsing container on mobile Safari
+  // fix collapsing sticky container on mobile Safari
+  min-height: 200px;
   padding-top: 20px;
   padding-bottom: $size-content-side-space-mobile;
+  padding-left: $size-content-side-space-mobile;
+  padding-right: $size-content-side-space-mobile;
 
   background-color: $color-white-w1;
 
@@ -115,16 +156,19 @@ body.is-display-consentmanager .g-consentmanager {
 
   @include use-breakpoint($breakpoint-navigation, above) {
     position: relative;
-    padding: unset;
     justify-content: flex-end;
     align-items: center;
     flex-direction: row;
+    min-height: auto;
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+
     > * {
-      margin-right: 20px;
+      margin-left: 20px;
       margin-bottom: 0;
 
-      &:last-child {
-        margin-right: 0;
+      &:first-child {
+        margin-left: 0;
       }
     }
   }
@@ -135,10 +179,25 @@ body.is-display-consentmanager .g-consentmanager {
   }
 }
 
+.g-consentmanager__imprint {
+  margin-right: auto;
+
+  @include ie11 {
+    float: left;
+    line-height: 50px; // approximate height of the CTA - this is kind of dirty (as it is the case with IE in general)
+    vertical-align: middle;
+  }
+}
+
 .g-consentmanager__toggle-details {
   align-self: flex-end;
   margin-bottom: 10px;
-
+  padding-left: $size-content-side-space-mobile;
+  padding-right: $size-content-side-space-mobile;
+  @include use-breakpoint($breakpoint-navigation, above) {
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+  }
   @include ie11 {
     display: block;
     float: right;
@@ -147,7 +206,6 @@ body.is-display-consentmanager .g-consentmanager {
 
 .g-consentmanager__setting-description {
   padding-left: 45px;
-  margin-bottom: 20px;
 }
 
 // Details are hidden (by default)
@@ -164,16 +222,119 @@ body.is-display-consentmanager .g-consentmanager {
   }
 }
 
+.g-consentmanager__setting-checkbox {
+  margin-bottom: 0;
+}
+
+
 // Details are shown
 .g-consentmanager--show-details {
-  .e-checkbox {
-    margin-bottom: 10px;
-  }
-
   .g-consentmanager__setting-description-wrapper {
     transition: height .5s $expo-tween-t1, opacity .3s $expo-tween-t2 .1s;
     opacity: 1;
     display: block;
     visibility: visible;
   }
+}
+
+.g-consentmanager__setting {
+  margin-bottom: $highlight-vertical-offset * 2;
+}
+
+.g-consentmanager__logo {
+  position: fixed;
+  z-index: $z-index-above-modals;
+  top: 0;
+  left: 6vw;
+  width: $logo-mobile-size;
+  height: auto;
+  @include use-breakpoint($breakpoint-navigation, above) {
+    display: none;
+  }
+}
+
+.g-consentmanager__close {
+  background-color: rgba(255, 255, 255, .2);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+
+  .e-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform $expo-tween-t1-time $expo-tween-t1;
+  }
+
+  @include use-breakpoint($breakpoint-navigation, above) {
+    top: -25px;
+    right: 40px;
+    background-color: $color-anthracite-a2;
+    .e-icon {
+      fill: $color-white-w1;
+    }
+    @include hover {
+      .e-icon {
+        transform: scale3d(1.5, 1.5, 1);
+        transform-origin: 50% 50%;
+      }
+    }
+  }
+}
+
+// HIGHLIGHTING
+.g-consentmanager:not(.g-consentmanager--has-highlighted-elements) {
+  .g-consentmanager__close {
+    display: none;
+  }
+}
+
+.g-consentmanager--has-highlighted-elements {
+  .g-consentmanager__confirm-all {
+    display: none;
+  }
+
+  .g-consentmanager__settings {
+    padding: 0;
+  }
+
+  .g-consentmanager__setting {
+    padding-left: $size-content-side-space-mobile;
+    padding-right: $size-content-side-space-mobile;
+    @include use-breakpoint($breakpoint-navigation, above) {
+      padding-left: $size-content-side-space;
+      padding-right: $size-content-side-space;
+    }
+  }
+
+  .g-consentmanager__setting--highlight {
+    background-color: $color-anthracite-a11;
+    border-left: $highlight-border-width solid $color-petrol-p1;
+    padding-left: calc(#{$size-content-side-space-mobile}-#{$highlight-border-width});
+    padding-top: $highlight-vertical-offset;
+    padding-bottom: $highlight-vertical-offset;
+    margin-bottom: $highlight-vertical-offset;
+    @include use-breakpoint($breakpoint-navigation, above) {
+      padding-left: $size-content-side-space / 2 - $highlight-border-width;
+      padding-right: $size-content-side-space;
+      margin-left: $size-content-side-space / 2;
+      margin-right: $size-content-side-space;
+    }
+  }
+
+  .g-consentmanager__buttons {
+    // fix collapsing sticky container on mobile Safari - in this case we need less space since we only have to deal with one(!) button
+    min-height: 140px;
+  }
+
+}
+
+// NOT highlighted settings have a larger bottom margin so we need to tweak this by moving the following setting up if it is highlighted
+.g-consentmanager__setting:not(.g-consentmanager__setting--highlight) + .g-consentmanager__setting--highlight {
+  margin-top: -$highlight-vertical-offset;
 }
