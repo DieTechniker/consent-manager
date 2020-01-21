@@ -374,7 +374,7 @@ export class ConsentManager {
         this.log(`highlightRequestedElements / params: `, params);
         let categoriesSelectorArray = [];
         if (params.requestCategories && params.requestCategories.length > 0) {
-            categoriesSelectorArray = params.requestCategories.map(category => `[data-tealiumcategoryname=${category.toLowerCase()}]`);
+            categoriesSelectorArray = params.requestCategories.map(category => `[data-tkcategoryname=${category.toLowerCase()}]`);
         }
         const selector = categoriesSelectorArray.join(', ');
         this.log(`highlightRequestedElements / selector: `, selector);
