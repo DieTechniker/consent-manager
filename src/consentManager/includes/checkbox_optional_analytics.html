@@ -1,10 +1,9 @@
 <!-- Funktion / analytics -->
 <div class="e-checkbox g-consentmanager__setting">
     <input class="g-consentmanager__setting-checkbox e-checkbox__input" type="checkbox" id="checkbox-analytics"
-        data-optional="true" data-tealiumcategoryname="analytics"
+        data-optional="true" data-tealiumcategoryname="{{optional_categories_tealium_cat_name_analytics}}"
         data-consentcookiename="{{optional_categories_cookie_name_analytics}}" aria-describedby="description-analytics"
-        {{optional_categories_preselected_analytics}} value=""
-        data-tkfeatures="{{optional_categories_tk_features_analytics}}">
+        {{optional_categories_preselected_analytics}} value="">
     <label for="checkbox-analytics" class="e-checkbox__label ">{{optional_categories_display_name_analytics}}</label>
     <div class="g-consentmanager__setting-description-wrapper">
         <p id="description-analytics" class="e-text g-consentmanager__setting-description">
