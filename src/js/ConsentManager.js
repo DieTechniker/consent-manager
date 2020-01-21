@@ -101,6 +101,7 @@ export class ConsentManager {
             // build categoryMap
             this.elements.consentSettingCheckboxes.forEach((item) => {
                 const tealiumCategoryName = item.getAttribute('data-tealiumcategoryname');
+                const tkCategoryName = item.getAttribute('data-tkcategoryname');
                 // use the tealiumCategoryName originally configured in the CMSettings to resolve the index of the category based on the (current) categories array
                 // before persisting we will be checking if a valid category was actually found
                 const tealiumCategoryIndex = tealiumCategoryArray.indexOf(tealiumCategoryName);
@@ -113,7 +114,7 @@ export class ConsentManager {
                     consentGiven
                 };
                 // add the enabled/disabled state for the current category to the categoryMap-entry
-                this.categoryMap[(consentGiven ? 'enabled' : 'disabled')] = this.categoryMap[(consentGiven ? 'enabled' : 'disabled')].concat(tealiumCategoryName);
+                this.categoryMap[(consentGiven ? 'enabled' : 'disabled')] = this.categoryMap[(consentGiven ? 'enabled' : 'disabled')].concat(tkCategoryName);
             });
             this.log('prepare / categoryMap:', this.categoryMap);
             this.writeCssCategories();
