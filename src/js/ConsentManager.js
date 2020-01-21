@@ -504,7 +504,8 @@ export class ConsentManager {
 
     disableHighlighting() {
         this.log('disableHighlighting');
-        this.settingItems.forEach(settingItem => {
+        debugger;
+        this.elements.settingItems.forEach(settingItem => {
             settingItem.classList.remove(ConsentManager.CLASSES.COMPONENTHASHIGHLIGHT);
         })
         this.root.classList.remove(ConsentManager.CLASSES.COMPONENTHASHIGHLIGHT);
