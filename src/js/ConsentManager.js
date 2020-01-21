@@ -63,23 +63,21 @@ export class ConsentManager {
         this.root = element;
         this.elements = {};
         this.elements.consentSettingCheckboxes = Array.from(this.root.querySelectorAll('.e-checkbox__input[data-optional="true"]'));
-        this.elements.btnConfirmSelection = Array.from(this.root.querySelectorAll('.g-consentmanager__confirm-selection'));
-        this.elements.btnConfirmAll = Array.from(this.root.querySelectorAll('.g-consentmanager__confirm-all'));
-        this.elements.btnClose = Array.from(this.root.querySelectorAll('.g-consentmanager__close'));
-        this.elements.toggleDetails = Array.from(this.root.querySelectorAll('.g-consentmanager__toggle-details'));
         this.elements.settingItems = Array.from(this.root.querySelectorAll('.g-consentmanager__setting'));
         this.elements.categoryDescriptionWrappers = Array.from(this.root.querySelectorAll('.g-consentmanager__setting-description-wrapper'));
-        this.elements.content = Array.from(this.root.querySelectorAll('.g-consentmanager__content'));
-        this.elements.toggleButton = Array.from(this.root.querySelectorAll('.m-togglebutton'));
+        this.elements.btnConfirmSelection = this.root.querySelector('.g-consentmanager__confirm-selection');
+        this.elements.btnConfirmAll = this.root.querySelector('.g-consentmanager__confirm-all');
+        this.elements.btnClose = this.root.querySelector('.g-consentmanager__close');
+        this.elements.toggleDetails = this.root.querySelector('.g-consentmanager__toggle-details');
 
         // Handler bindings
-        this.elements.btnConfirmSelection.forEach(button => button.addEventListener('click', this.handleClickConfirmSelection.bind(this)));
-        this.elements.btnConfirmAll.forEach(button => button.addEventListener('click', this.handleClickConfirmAll.bind(this)));
-        this.elements.btnClose.forEach(button => button.addEventListener('click', this.handleClickClose.bind(this)));
-        this.elements.toggleDetails.forEach(button => {
-            new ToggleButton(button);
-            button.addEventListener('click', this.handleClickToggleDetails.bind(this))
-        });
+        this.elements.btnConfirmSelection.addEventListener('click', this.handleClickConfirmSelection.bind(this));
+        this.elements.btnConfirmAll.addEventListener('click', this.handleClickConfirmAll.bind(this));
+        this.elements.btnClose.addEventListener('click', this.handleClickClose.bind(this));
+        this.elements.toggleDetails.addEventListener('click', this.handleClickToggleDetails.bind(this))
+
+        // Initialize other UI-components
+        new ToggleButton(this.elements.toggleDetails);
 
         this.prepare();
     }
@@ -368,21 +366,28 @@ export class ConsentManager {
         this.handlePostRender();
     }
 
+    /**
+     * Highlights the requested (optional) categories. If requested categories were found:
+     * - the 'select all' button will be hidden
+     * - a close button will be made visible
+     * - there will be no reload if the close-button is used
+     * see: https://jira-spu.tk-online.net/browse/KANUK-69
+     * @param {requestCategories: [*]} params 
+     */
     handleAdditionalFeatureAndCategoryRequests(params = { requestCategories: [] }) {
         this.log(`highlightRequestedElements / params: `, params);
         let categoriesSelectorArray = [];
-        let featuresSelectorArray = [];
         if (params.requestCategories && params.requestCategories.length > 0) {
-            categoriesSelectorArray = params.requestCategories.map(category => `[data-tkcategoryenumvalue=${category.toUpperCase()}]`);
+            categoriesSelectorArray = params.requestCategories.map(category => `[data-tealiumcategoryname=${category.toLowerCase()}]`);
         }
-        const selector = [...categoriesSelectorArray, ...featuresSelectorArray].join(', ');
+        const selector = categoriesSelectorArray.join(', ');
         this.log(`highlightRequestedElements / selector: `, selector);
         if (selector) {
             const elementsToBeHighlighted = Array.from(this.root.querySelectorAll(selector));
             if (elementsToBeHighlighted.length > 0) {
                 this.log(`highlightRequestedElements / elementsToBeHighlighted: `, elementsToBeHighlighted);
                 elementsToBeHighlighted.forEach(item => {
-                    item.closest(`.${Component.CLASSES.SETTING}`).classList.add(Component.CLASSES.SETTINGHIGHLIGHT);
+                    item.closest(`.${ConsentManager.CLASSES.SETTING}`).classList.add(ConsentManager.CLASSES.SETTINGHIGHLIGHT);
                 });
                 this.enableHighlighting();
                 this.enableCloseButton();
@@ -512,12 +517,12 @@ export class ConsentManager {
 
     enableCloseButton() {
         this.log('enableCloseButton');
-        this.btnClose.setAttribute('aria-hidden', false);
+        this.elements.btnClose.setAttribute('aria-hidden', false);
     }
 
     disableCloseButton() {
         this.log('disableCloseButton');
-        this.btnClose.setAttribute('aria-hidden', true);
+        this.elements.btnClose.setAttribute('aria-hidden', true);
     }
 
     /* Public ---------------------------------------------------------------------------------- */

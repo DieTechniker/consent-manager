@@ -4,20 +4,21 @@ $buttons-assumed-max-height: 150px;
 $logo-mobile-size: 65px;
 
 .g-consentmanager {
-  box-sizing: border-box;
-  *, *:before, *:after {
-    box-sizing: inherit;
-  }  
-}
-
-.g-consentmanager {
   // Wenn sich etwas an der grundlegenden Anzeige des Consent-Managers ändern sollte, muss dies bitte auch im <noscript> des Templates zurückgesetzt werden.
   display: none;
+
+  // Erzwinge korrektes box-sizing und stelle sicher, dass der gesamte SCSS-Code in die Tealium-Variante rüberkopiert werden kann
+  box-sizing: border-box;
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
 }
 
 body.is-display-consentmanager {
   // Wenn sich etwas an der grundlegenden Anzeige des Consent-Managers ändern sollte, muss dies bitte auch im <noscript> des Templates zurückgesetzt werden.
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 body.is-display-consentmanager .g-consentmanager {
@@ -51,9 +52,14 @@ body.is-display-consentmanager .g-consentmanager {
 .g-consentmanager__content-wrapper {
   position: relative;
   display: flex;
+  width: 100%;
+  max-width: 768px;
   flex-direction: column;
   max-height: 100%;
 
+  @include use-breakpoint($breakpoint-navigation, above) {
+    flex-basis: auto;
+  }
   @include ie11 {
     display: block;
     margin: 0 auto;
@@ -66,8 +72,6 @@ body.is-display-consentmanager .g-consentmanager {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 768px;
   max-height: 100%;
   background-color: $color-white-w1;
   padding-top: $logo-mobile-size + 20px; // make some room for the logo
