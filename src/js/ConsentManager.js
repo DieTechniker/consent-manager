@@ -90,8 +90,7 @@ export class ConsentManager {
         this.onConsentManagerConfirmedCookieName = this.root.getAttribute('data-consent-settings-saved-cookie-name');
 
         if (window.utag && window.utag.gdpr) {
-            this.categoryMap = {};
-            this.featureMap = {
+            this.categoryMap = {
                 'enabled': [],
                 'disabled': []
             };
@@ -106,23 +105,19 @@ export class ConsentManager {
                 // before persisting we will be checking if a valid category was actually found
                 const tealiumCategoryIndex = tealiumCategoryArray.indexOf(tealiumCategoryName);
                 const consentCookieName = item.getAttribute('data-consentcookiename');
-                const tkFeatures = item.getAttribute('data-tkfeatures') || '';
-                const tkFeaturesArray = tkFeatures.split(',');
                 const consentGiven = getCookie(consentCookieName) === '1';
                 this.log(`prepare / cookie: ${consentCookieName} -> ${getCookie(consentCookieName)}`);
                 this.categoryMap[tealiumCategoryName] = {
                     tealiumCategoryIndex,
                     consentCookieName,
-                    consentGiven,
-                    'tkFeatures': tkFeaturesArray
+                    consentGiven
                 };
-                // add the features for the current category to the corresponding featureMap-entry
-                this.featureMap[(consentGiven ? 'enabled' : 'disabled')] = this.featureMap[(consentGiven ? 'enabled' : 'disabled')].concat(tkFeaturesArray);
+                // add the enabled/disabled state for the current category to the categoryMap-entry
+                this.categoryMap[(consentGiven ? 'enabled' : 'disabled')] = this.categoryMap[(consentGiven ? 'enabled' : 'disabled')].concat(tealiumCategoryName);
             });
             this.log('prepare / categoryMap:', this.categoryMap);
-            this.log('prepare / featureMap:', this.featureMap);
-            this.writeCssFeatures();
-            this.writeJsFeatures();
+            this.writeCssCategories();
+            this.writeJsCategories();
 
             this.setGlobalOpenHandler();
             this.registerUrlHashChangeListener();
@@ -452,8 +447,8 @@ export class ConsentManager {
         document.removeEventListener('keydown', this.handleKeyDownAndTrapTabbing);
     }
 
-    writeCssFeatures() {
-        this.log('writeCssFeatures');
+    writeCssCategories() {
+        this.log('writeCssCategories');
 
         // polyfill for IE11
         DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function () {
@@ -462,22 +457,22 @@ export class ConsentManager {
             }
         }
 
-        const enabledFeatureClasses = this.featureMap.enabled.map(enabledFeature => `consent-feature_${enabledFeature.trim().toLowerCase()}-true`);
-        const disabledFeatureClasses = this.featureMap.disabled.map(disabledFeature => `consent-feature_${disabledFeature.trim().toLowerCase()}-false`);
-        document.querySelector('body').classList.addMany(...enabledFeatureClasses);
-        document.querySelector('body').classList.addMany(...disabledFeatureClasses);
+        const enabledCategoryClasses = this.categoryMap.enabled.map(enabledCategory => `consent-category_${enabledCategory.trim().toLowerCase()}-true`);
+        const disabledCategoryClasses = this.categoryMap.disabled.map(disabledCategory => `consent-category_${disabledCategory.trim().toLowerCase()}-false`);
+        document.querySelector('body').classList.addMany(...enabledCategoryClasses);
+        document.querySelector('body').classList.addMany(...disabledCategoryClasses);
     }
 
-    writeJsFeatures() {
-        this.log('writeJsFeatures');
+    writeJsCategories() {
+        this.log('writeJsCategories');
         window.tk = window.tk || {};
         window.tk.consentManager = window.tk.consentManager || {};
-        window.tk.consentManager.features = {};
-        this.featureMap.enabled.forEach(enabledFeature => {
-            window.tk.consentManager.features[`FEATURE_${enabledFeature.trim().toUpperCase()}`] = true;
+        window.tk.consentManager.categories = {};
+        this.categoryMap.enabled.forEach(enabledCategory => {
+            window.tk.consentManager.categories[`CATEGORY_${enabledCategory.trim().toUpperCase()}`] = true;
         });
-        this.featureMap.disabled.forEach(disabledFeature => {
-            window.tk.consentManager.features[`FEATURE_${disabledFeature.trim().toUpperCase()}`] = false;
+        this.categoryMap.disabled.forEach(disabledCategory => {
+            window.tk.consentManager.categories[`CATEGORY_${disabledCategory.trim().toUpperCase()}`] = false;
         })
     }
 
