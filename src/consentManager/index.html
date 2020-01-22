@@ -1,30 +1,24 @@
 <div id="tkConsentmanager" class="g-consentmanager"
   data-consent-settings-saved-cookie-name="{{consent_settings_saved_cookie_name}}" data-delayedselectionenabled="true"
   role="dialog" aria-labelledby="g-consentmanager__headline" aria-describedby="g-consentmanager__introtext">
-  <div class="g-consentmanager__content" tabindex="-1">
-    <img aria-hidden="true" class="g-consentmanager__logo" alt="Logo"
-      src="https://www.tk.de/blueprint/static/assets/base/images/logo_Sonderform.svg#icon">
-
-    <h2 class="e-headline e-headline--h2 g-consentmanager__headline" id="g-consentmanager__headline">
-      {{headline}}
-    </h2>
-
-    <div id="g-consentmanager__introtext" class="m-richtext g-consentmanager__introtext">
-      {{introtext}}
+  <div class="g-consentmanager__content-wrapper">
+    <div class="g-consentmanager__content" tabindex="-1">
+      <h2 class="e-headline e-headline--h2 g-consentmanager__headline" id="g-consentmanager__headline">
+        {{headline}}
+      </h2>
+      <div id="g-consentmanager__introtext" class="m-richtext g-consentmanager__introtext">
+        {{introtext}}
+      </div>
+      <include src="./consentManager/includes/togglebutton.html"></include>
+      <div class="g-consentmanager__settings">
+        <include src="./consentManager/includes/checkbox_mandatory_required.html"></include>
+        <include src="./consentManager/includes/checkbox_optional_analytics.html"></include>
+        <include src="./consentManager/includes/checkbox_optional_displayads.html"></include>
+        <include src="./consentManager/includes/checkbox_optional_misc.html"></include>
+      </div>
+      <include src="./consentManager/includes/buttons.html"></include>
     </div>
-
-    <include src="./consentManager/includes/togglebutton.html"></include>
-
-    <div class="g-consentmanager__settings">
-
-      <include src="./consentManager/includes/checkbox_mandatory_required.html"></include>
-      <include src="./consentManager/includes/checkbox_optional_analytics.html"></include>
-      <include src="./consentManager/includes/checkbox_optional_displayads.html"></include>
-      <include src="./consentManager/includes/checkbox_optional_misc.html"></include>
-
-    </div>
-
-    <include src="./consentManager/includes/buttons.html"></include>
-
+    <include src="./consentManager/includes/logo.html"></include>
+    <include src="./consentManager/includes/close_button.html"></include>
   </div>
 </div>
