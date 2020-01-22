@@ -470,10 +470,10 @@ export class ConsentManager {
         window.tk.consentManager = window.tk.consentManager || {};
         window.tk.consentManager.categories = {};
         this.categoryMap.enabled.forEach(enabledCategory => {
-            window.tk.consentManager.categories[`CATEGORY_${enabledCategory.trim().toUpperCase()}`] = true;
+            window.tk.consentManager.categories[`${enabledCategory.trim().toUpperCase()}`] = true;
         });
         this.categoryMap.disabled.forEach(disabledCategory => {
-            window.tk.consentManager.categories[`CATEGORY_${disabledCategory.trim().toUpperCase()}`] = false;
+            window.tk.consentManager.categories[`${disabledCategory.trim().toUpperCase()}`] = false;
         })
     }
 
