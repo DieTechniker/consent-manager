@@ -2,20 +2,22 @@
 (function initializeConsentManager() {
     if (utag && utag.gdpr && utag.gdpr.showConsentPreferences) {
         console.log('initializeConsentManager');
-        // initialize the tealium consent manager - this will perform the following steps: 
-        // * replace placeholders within the markup with custom texts defined in the tealium admin panel
-        // * mount the markup into the DOM
-        // * render the corresponding CSS-feature-classes on the <body>-element
-        // * write the corresponding JS-feature-map in window.tk.consentManager.features
-        // * this will not(!) show any consent manager to the user
+        // initialize the tealium consent manager 
+        // although the name of the function is `showConsentPreferences` this will NOT(!) show any consent manager to the user yet - we are simply using it to bootstrap and prepare the consent manager
+        // this function call will perform the following steps: 
+        // * tealium will replace placeholders within the markup with custom texts defined in the tealium admin panel
+        // * tealium will mount the markup into the DOM
+        // * initialize a new instance of the ConsentManager class which in turn will: 
+        //      - render the corresponding CSS-category-classes on the <body>-element
+        //      - write the corresponding JS-category-map in window.tk.consentManager.categories
         utag.gdpr.showConsentPreferences();
     } else {
-        console.log("utag.gdpr.showConsentPreferences is not available - setting all features (CSS / JS) to true");
+        console.log("utag.gdpr.showConsentPreferences is not available - defaulting all categories (CSS / JS) to true");
 
-        // write JS-feature map
+        // write JS-category map
         window.tk = window.tk || {};
         window.tk.consentManager = window.tk.consentManager || {};
-        window.tk.consentManager.features = { FEATURE_ANALYTICS: true, FEATURE_MULTIVARIANZTESTING: true, FEATURE_PERSONALISIERUNG: true, FEATURE_MARKETING_ANALYTICS: true, FEATURE_MAPS: true };
+        window.tk.consentManager.categories = { CATEGORY_NUTZERGERECHTE_GESTALTUNG: true, CATEGORY_WIRTSCHAFTLICHER_WERBEEINSATZ: true, CATEGORY_DIENSTE_VON_DRITTANBIETERN: true };
 
         // write CSS-body classes
         // polyfill for IE11
@@ -24,7 +26,7 @@
                 this.add(arguments[i]);
             }
         }
-        const enabledFeatureClasses = ["consent-feature_analytics-true", "consent-feature_multivarianztesting-true", "consent-feature_personalisierung-true", "consent-feature_marketing_analytics-true", "consent-feature_maps-true"]
-        document.querySelector('body').classList.addMany(...enabledFeatureClasses);
+        const enabledCategoryClasses = ["consent-category_nutzergerechte_gestaltung-true", "consent-category_wirtschaftlicher_werbeeinsatz-true", "consent-category_dienste_von_drittanbietern-true"]
+        document.querySelector('body').classList.addMany(...enabledCategoryClasses);
     }
 })()
