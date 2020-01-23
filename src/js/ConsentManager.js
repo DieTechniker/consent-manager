@@ -87,7 +87,8 @@ export class ConsentManager {
     prepare() {
         window.addEventListener('resize', this.handleResize.bind(this), true);
 
-        this.onConsentManagerConfirmedCookieName = this.root.getAttribute('data-consent-settings-saved-cookie-name');
+        this.onConsentManagerConfirmedCookieName = this.root.getAttribute('data-consentsettingssavedcookiename');
+        this.vanityUrlWhitelistCsv = this.root.getAttribute('data-vanityurlwhitelistcsv');
 
         if (window.utag && window.utag.gdpr) {
             this.categoryMap = {
@@ -124,8 +125,8 @@ export class ConsentManager {
             this.registerUrlHashChangeListener();
             this.enableTabTrapping();
 
-            // open if there is the url-hash or if there was no according cookie set previously
-            if (this.isUrlHashPresent() || !this.isConsentManagerConfirmedCookiePresent()) {
+            // open if there is the url-hash or if there was no according cookie set previously and the page is not whitelisted
+            if (this.isUrlHashPresent() || !this.isConsentManagerConfirmedCookiePresent() && !this.currentPageIsWhitelisted()) {
                 this.openConsentManager();
             }
         } else {
@@ -424,6 +425,16 @@ export class ConsentManager {
         const consentManagerConfirmedCookieValue = getCookie(this.onConsentManagerConfirmedCookieName);
         this.log('isConsentManagerConfirmedCookie: ', consentManagerConfirmedCookieValue);
         return consentManagerConfirmedCookieValue !== '';
+    }
+
+    /**
+     * checks if the current URL is explicitly marked for NOT automatically displaying the consent-manager for users 
+     * that have not already consented  
+     */
+    currentPageIsWhitelisted() {
+        const vanityUrlWhitelistArray = this.vanityUrlWhitelistCsv.split(',').map(item => item.toLowerCase().trim());
+        const currentUrlFirstSegment = window.location.pathname.split('/')[1].toLowerCase();
+        return vanityUrlWhitelistArray.includes(currentUrlFirstSegment);
     }
 
     /**
