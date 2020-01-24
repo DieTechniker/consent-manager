@@ -350,6 +350,10 @@ body.is-display-consentmanager .g-consentmanager {
   .g-consentmanager__buttons {
     // fix collapsing sticky container on mobile Safari - in this case we need less space since we only have to deal with one(!) button
     min-height: 140px;
+
+    @include ie11 {
+      min-height: auto;
+    }
   }
 }
 
