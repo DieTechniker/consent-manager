@@ -21,12 +21,13 @@
 
         // write CSS-body classes
         // polyfill for IE11
-        DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function () {
-            for (var i = 0; i < arguments.length; i++) {
-                this.add(arguments[i]);
+        DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function (classesArray) {
+            for (var i = 0; i < classesArray.length; i++) {
+                this.add(classesArray[i]);
             }
         }
+
         const enabledCategoryClasses = ["consent-category_nutzergerechte_gestaltung-true", "consent-category_wirtschaftlicher_werbeeinsatz-true", "consent-category_dienste_von_drittanbietern-true"]
-        document.querySelector('body').classList.addMany(...enabledCategoryClasses);
+        document.querySelector('body').classList.addMany(enabledCategoryClasses);
     }
 })()

@@ -463,16 +463,16 @@ export class ConsentManager {
         this.log('writeCssCategories');
 
         // polyfill for IE11
-        DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function () {
-            for (var i = 0; i < arguments.length; i++) {
-                this.add(arguments[i]);
+        DOMTokenList.prototype.addMany = DOMTokenList.prototype.addMany || function (classesArray) {
+            for (var i = 0; i < classesArray.length; i++) {
+                this.add(classesArray[i]);
             }
         }
 
         const enabledCategoryClasses = this.categoryMap.enabled.map(enabledCategory => `consent-category_${enabledCategory.trim().toLowerCase()}-true`);
         const disabledCategoryClasses = this.categoryMap.disabled.map(disabledCategory => `consent-category_${disabledCategory.trim().toLowerCase()}-false`);
-        document.querySelector('body').classList.addMany(...enabledCategoryClasses);
-        document.querySelector('body').classList.addMany(...disabledCategoryClasses);
+        document.querySelector('body').classList.addMany(enabledCategoryClasses);
+        document.querySelector('body').classList.addMany(disabledCategoryClasses);
     }
 
     writeJsCategories() {
