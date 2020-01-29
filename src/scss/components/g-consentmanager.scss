@@ -1,5 +1,5 @@
 /*****************************************************************************************************************************************************
- * 
+ *
  * WICHTIG: Diese Datei exisitiert in den beiden Projekten 'patternlab' und 'tealium_consent-manager_external' bei gleichem Inhalt.
  * Es sollte bei Änderungen darauf geachtet werden, dass diese Austauschbarkeit erhalten bleibt, um ein einfaches Copy/Pasten der Styles zu ermöglichen!
  *
@@ -200,6 +200,15 @@ body.is-display-consentmanager .g-consentmanager {
 
 .g-consentmanager__imprint {
   margin-right: auto;
+  text-decoration: underline;
+
+  margin-top: 20px;
+  order: 3;
+
+  @include use-breakpoint($breakpoint-navigation, above) {
+    order: unset;
+    margin-top: unset;
+  }
 
   @include ie11 {
     float: left;
