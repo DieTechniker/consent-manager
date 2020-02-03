@@ -6,18 +6,32 @@
  * @param secure - only send the cookie over SSL secured connections
  * @param includeSubdomains - allow the cookie to be accessed on subdomains as well
  */
-export function setCookie(cname, cvalue, exdays, secure = true, includeSubdomains = true) {
+export function setCookie(
+  cname,
+  cvalue,
+  exdays,
+  secure = true,
+  includeSubdomains = true
+) {
+  let expiresStr = ";expires=";
+  if (exdays !== undefined) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    // allow access on all subdomains by prepending the domain with a dot e.g. '.tk.de' - except on localhost
-    let domain = '';
-    if (includeSubdomains) {
-        domain = ';domain=' + (getCurrentDomainWithoutSubdomains() === 'localhost' ? 'localhost' : '.' + getCurrentDomainWithoutSubdomains());
-    }
-    const path = ';path=/';
-    const expires = ';expires=' + d.toUTCString();
-    const secureStr = secure ? ';secure' : '';
-    document.cookie = cname + '=' + cvalue + domain + path + expires + secureStr;
+    d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+    expiresStr = ";expires=" + d.toUTCString();
+  }
+  // allow access on all subdomains by prepending the domain with a dot e.g. '.tk.de' - except on localhost
+  let domain = "";
+  if (includeSubdomains) {
+    domain =
+      ";domain=" +
+      (getCurrentDomainWithoutSubdomains() === "localhost"
+        ? "localhost"
+        : "." + getCurrentDomainWithoutSubdomains());
+  }
+  const path = ";path=/";
+  const secureStr = secure ? ";secure" : "";
+  document.cookie =
+    cname + "=" + cvalue + domain + path + expiresStr + secureStr;
 }
 
 /**
@@ -28,10 +42,10 @@ export function setCookie(cname, cvalue, exdays, secure = true, includeSubdomain
  * @returns {string}
  */
 function getCurrentDomainWithoutSubdomains() {
-    const domain = document.domain;
-    const parts = domain.split('.').reverse();
-    if (parts != null && parts.length > 1) {
-        return parts[1] + '.' + parts[0];
-    }
-    return domain;
+  const domain = document.domain;
+  const parts = domain.split(".").reverse();
+  if (parts != null && parts.length > 1) {
+    return parts[1] + "." + parts[0];
+  }
+  return domain;
 }
