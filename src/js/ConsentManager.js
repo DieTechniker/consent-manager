@@ -35,7 +35,7 @@ export class ConsentManager {
   }
 
   static get COOKIEVALIDITY() {
-    return "2147483647"; // maximum cookie-validity in days compatible with 32-bit systems 2147483647 = 2^31 = ~year 2038
+    return 365 * 5; // ~5 years
   }
 
   static get ACTIONTRACKING_PREFIX() {
