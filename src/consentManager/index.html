@@ -1,26 +1,30 @@
-<div id="tkConsentmanager" class="g-consentmanager"
-  data-consentsettingssavedcookiename="{{consent_settings_saved_cookie_name}}" data-delayedselectionenabled="true"
-  data-vanityurlwhitelistcsv="{{vanity_url_whitelist_csv}}" role="dialog" aria-labelledby="g-consentmanager__headline"
-  aria-describedby="g-consentmanager__introtext">
-  <div class="g-consentmanager__content-wrapper">
-    <div class="g-consentmanager__content" tabindex="-1">
-      <h2 class="e-headline e-headline--h2 g-consentmanager__headline" id="g-consentmanager__headline">
-        {{headline}}
-      </h2>
-      <div id="g-consentmanager__introtext" class="m-richtext g-consentmanager__introtext">
-        {{introtext}}
-      </div>
-      <include src="./consentManager/includes/togglebutton.html"></include>
-      <div class="g-consentmanager__settings">
-        <include src="./consentManager/includes/checkbox_mandatory_required.html"></include>
-        <include src="./consentManager/includes/checkbox_optional_analytics.html"></include>
-        <include src="./consentManager/includes/checkbox_optional_displayads.html"></include>
-        <include src="./consentManager/includes/checkbox_optional_misc.html"></include>
-      </div>
-      <include src="./consentManager/includes/buttons.html"></include>
+<div class="tkConsentmanagerExternal">
+    <div id="tkConsentmanager" class="g-consentmanager"
+         data-consentsettingssavedcookiename="{{consent_settings_saved_cookie_name}}"
+         data-delayedselectionenabled="true"
+         data-vanityurlwhitelistcsv="{{vanity_url_whitelist_csv}}" role="dialog"
+         aria-labelledby="g-consentmanager__headline"
+         aria-describedby="g-consentmanager__introtext">
+        <div class="g-consentmanager__content-wrapper">
+            <div class="g-consentmanager__content" tabindex="-1">
+                <h2 class="e-headline e-headline--h2 g-consentmanager__headline" id="g-consentmanager__headline">
+                    {{headline}}
+                </h2>
+                <div id="g-consentmanager__introtext" class="m-richtext g-consentmanager__introtext">
+                    {{introtext}}
+                </div>
+                <include src="./consentManager/includes/togglebutton.html"></include>
+                <div class="g-consentmanager__settings">
+                    <include src="./consentManager/includes/checkbox_mandatory_required.html"></include>
+                    <include src="./consentManager/includes/checkbox_optional_analytics.html"></include>
+                    <include src="./consentManager/includes/checkbox_optional_displayads.html"></include>
+                    <include src="./consentManager/includes/checkbox_optional_misc.html"></include>
+                </div>
+                <include src="./consentManager/includes/buttons.html"></include>
+            </div>
+            <include src="./consentManager/includes/logo.html"></include>
+            <include src="./consentManager/includes/close_button.html"></include>
+        </div>
     </div>
-    <include src="./consentManager/includes/logo.html"></include>
-    <include src="./consentManager/includes/close_button.html"></include>
-  </div>
 </div>
 <script src="js/focus-visible.js"></script>
