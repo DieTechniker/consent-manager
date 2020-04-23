@@ -2,7 +2,7 @@
 @import '../../node_modules/breakpoint-sass/stylesheets/breakpoint';
 @import '../../node_modules/susy/sass/susy';
 
-// fonts - we need to absolutely reference the SoletoTK at tk.de 
+// fonts - we need to absolutely reference the SoletoTK at tk.de
 @import '../scss/fonts';
 
 // mixins
@@ -14,19 +14,25 @@
 @import '../scss/mixins/animations';
 @import '../scss/mixins/grid';
 
-// components
-@import '../scss/components/e-checkbox.scss';
-@import '../scss/components/e-cta.scss';
-@import '../scss/components/e-headline.scss';
-@import '../scss/components/e-icon.scss';
-@import '../scss/components/e-iconbutton.scss';
-@import '../scss/components/e-link.scss';
-@import '../scss/components/e-text.scss';
-@import '../scss/components/g-consentmanager.scss';
-@import '../scss/components/m-richtext.scss';
-@import '../scss/components/m-togglebutton.scss';
+// die TK Komponenten müssen durch einen extra Wrapper gescoped werden - weil:
+// * es zu Konflikten kommen, wenn der Drittanbieter die selben Klasse verwendet
+// * es könnten zudem Probleme beim tk-markenportal.de entstehen
+.tkConsentmanagerExternal {
+  // components
+  @import '../scss/components/e-checkbox.scss';
+  @import '../scss/components/e-cta.scss';
+  @import '../scss/components/e-headline.scss';
+  @import '../scss/components/e-icon.scss';
+  @import '../scss/components/e-iconbutton.scss';
+  @import '../scss/components/e-link.scss';
+  @import '../scss/components/e-text.scss';
+  @import '../scss/components/m-richtext.scss';
+  @import '../scss/components/m-togglebutton.scss';
+}
 
+@import '../scss/components/g-consentmanager.scss';
+// Spezialisierungen nur für die externen Seiten
 .g-consentmanager {
-    @include use-text(base);
-    color: $color-text;
+  @include use-text(base);
+  color: $color-text;
 }
