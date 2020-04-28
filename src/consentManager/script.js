@@ -1,5 +1,4 @@
 import { ConsentManager } from "../js/ConsentManager";
-
 import '@babel/polyfill';
 
 // get the mounted element

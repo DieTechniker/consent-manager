@@ -28,6 +28,10 @@
   @import '../scss/components/e-text.scss';
   @import '../scss/components/m-richtext.scss';
   @import '../scss/components/m-togglebutton.scss';
+
+  .has-keyboardfocus:focus {
+    outline: 2px solid $color-cyan-c1;
+  }
 }
 
 @import '../scss/components/g-consentmanager.scss';
@@ -35,4 +39,12 @@
 .g-consentmanager {
   @include use-text(base);
   color: $color-text;
+
+  .g-consentmanager__confirm-all {
+    margin-top: 10px;
+    @include use-breakpoint($breakpoint-navigation, above) {
+      margin-top: initial;
+      margin-left: 20px;
+    }
+  }
 }

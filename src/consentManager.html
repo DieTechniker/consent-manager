@@ -2,54 +2,61 @@
 <html style="background-color: rgb(255, 210, 87)">
 
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="./consentManager/styles.scss" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="./consentManager/styles.scss"/>
 </head>
 
 <body>
-  <a href="#0">
+<a href="#0">
     <h1>Ich bin ein Link!</h1>
-  </a>
-  <!-- vvvvvvvvvvvvvvvvvvv SCHNIPP vvvvvvvvvvvvvvvvvvv -->
-  <include src="./consentManager/index.html"></include>
-  <!-- ^^^^^^^^^^^^^^^^^^^ SCHNAPP ^^^^^^^^^^^^^^^^^^^ -->
-  <script>
+</a>
+<!-- vvvvvvvvvvvvvvvvvvv SCHNIPP vvvvvvvvvvvvvvvvvvv -->
+<include src="./consentManager/index.html"></include>
+<!-- ^^^^^^^^^^^^^^^^^^^ SCHNAPP ^^^^^^^^^^^^^^^^^^^ -->
+<script>
     // Mocks the presence of Tealium utag consent categories
     const categoriesFn = function () {
-      return ["analytics", "affiliates", "display_ads", "search", "email", "personalization", "social", "big_data", "misc", "cookiematch", "cdp", "mobile", "engagement", "monitoring", "crm"]
+        return ["analytics", "affiliates", "display_ads", "search", "email", "personalization", "social", "big_data", "misc", "cookiematch", "cdp", "mobile", "engagement", "monitoring", "crm"]
     };
 
     const setPreferencesValuesFn = function (prefs) {
-      console.log('setPreferencesValuesFn: ', prefs);
+        console.log('setPreferencesValuesFn: ', prefs);
     };
 
     const showConsentPreferencesFn = function () {
-      console.log('showConsentPreferences() was called');
+        console.log('showConsentPreferences() was called');
     };
 
     (function (categoriesFn, setPreferencesValuesFn) {
-      window.utag = window.utag || {
-        gdpr: {
-          getCategories: categoriesFn,
-          setPreferencesValues: setPreferencesValuesFn,
-          showConsentPreferences: showConsentPreferencesFn
-        },
-        link: function () { return null },
-        view: function () { return null }
-      };
-      window.utag.gdpr = window.utag.gdpr || {
-        getCategories: categoriesFn,
-        setPreferencesValues: setPreferencesValuesFn
-      };
-      window.utag.link = window.utag.link || (function () { return null });
-      window.utag.view = window.utag.view || (function () { return null });
-      window.utag.gdpr.getCategories = window.utag.gdpr.getCategories || categoriesFn;
-      window.utag.gdpr.setPreferencesValues = window.utag.gdpr.setPreferencesValues || setPreferencesValuesFn;
+        window.utag = window.utag || {
+            gdpr: {
+                getCategories: categoriesFn,
+                setPreferencesValues: setPreferencesValuesFn,
+                showConsentPreferences: showConsentPreferencesFn
+            },
+            link: function () {
+                return null
+            },
+            view: function () {
+                return null
+            }
+        };
+        window.utag.gdpr = window.utag.gdpr || {
+            getCategories: categoriesFn,
+            setPreferencesValues: setPreferencesValuesFn
+        };
+        window.utag.link = window.utag.link || (function () {
+            return null
+        });
+        window.utag.view = window.utag.view || (function () {
+            return null
+        });
+        window.utag.gdpr.getCategories = window.utag.gdpr.getCategories || categoriesFn;
+        window.utag.gdpr.setPreferencesValues = window.utag.gdpr.setPreferencesValues || setPreferencesValuesFn;
 
     })(categoriesFn, setPreferencesValuesFn, showConsentPreferencesFn);
-  </script>
-  <script src="./consentManager/script.js"></script>
-
+</script>
+<script src="./consentManager/script.js"></script>
+<script src="tealium-js-extensions/focus-visible.js"></script>
 </body>
-
 </html>
