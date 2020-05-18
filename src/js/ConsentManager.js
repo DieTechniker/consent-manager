@@ -58,6 +58,9 @@ export class ConsentManager {
     this.log = debug("consentManager");
     this.log("ConsentManager constructor");
 
+    // bind "this" here to make sure we are dealing with the identical function when adding and removing the event listener
+    this.handleKeyDownAndTrapTabbing = this.handleKeyDownAndTrapTabbing.bind(this);
+
     // Elements
     this.root = element;
     this.elements = {};
@@ -604,7 +607,7 @@ export class ConsentManager {
     this.log("enableTabTrapping");
     document.addEventListener(
       "keydown",
-      this.handleKeyDownAndTrapTabbing.bind(this)
+      this.handleKeyDownAndTrapTabbing
     );
   }
 
