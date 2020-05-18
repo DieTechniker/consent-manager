@@ -170,7 +170,6 @@ export class ConsentManager {
 
       this.setGlobalOpenHandler();
       this.registerUrlHashChangeListener();
-      this.enableTabTrapping();
 
       // open if there is the url-hash or if there was no according cookie set previously and the page is not whitelisted
       if (
@@ -481,6 +480,8 @@ export class ConsentManager {
     this.handleAdditionalFeatureAndCategoryRequests(params);
     // the additional features must be done before the focussing takes place - the close button might not always be present
     this.focusFirstElement();
+    this.enableTabTrapping();
+
     // pre-select checkboxes based on the cookies that are already set
     this.preselectCheckboxes();
     document
