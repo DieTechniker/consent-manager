@@ -58,6 +58,9 @@ export class ConsentManager {
     this.log = debug("consentManager");
     this.log("ConsentManager constructor");
 
+    // bind "this" here to make sure we are dealing with the identical function when adding and removing the event listener
+    this.handleKeyDownAndTrapTabbing = this.handleKeyDownAndTrapTabbing.bind(this);
+
     // Elements
     this.root = element;
     this.elements = {};
@@ -170,7 +173,6 @@ export class ConsentManager {
 
       this.setGlobalOpenHandler();
       this.registerUrlHashChangeListener();
-      this.enableTabTrapping();
 
       // open if there is the url-hash or if there was no according cookie set previously and the page is not whitelisted
       if (
@@ -481,6 +483,8 @@ export class ConsentManager {
     this.handleAdditionalFeatureAndCategoryRequests(params);
     // the additional features must be done before the focussing takes place - the close button might not always be present
     this.focusFirstElement();
+    this.enableTabTrapping();
+
     // pre-select checkboxes based on the cookies that are already set
     this.preselectCheckboxes();
     document
@@ -603,7 +607,7 @@ export class ConsentManager {
     this.log("enableTabTrapping");
     document.addEventListener(
       "keydown",
-      this.handleKeyDownAndTrapTabbing.bind(this)
+      this.handleKeyDownAndTrapTabbing
     );
   }
 
