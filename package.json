@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "parcel serve ./src/consentManager.html --https --open --no-cache",
-    "build": "parcel build ./src/consentManager.html --no-source-maps --no-minify --no-cache",
+    "build": "rm -rf dist && parcel build ./src/consentManager.html --no-source-maps --no-minify --no-cache --bundle-node-modules",
     "test": "parcel serve ./src/test.html --https --port 4321 --open"
   },
   "browserslist": [
