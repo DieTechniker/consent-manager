@@ -1,3 +1,4 @@
+// target profiles: tk.de / external
 // The content of this file needs to be configured as a JS-extension with scope "Pre Loader".
 
 // We override the cookie domain in order to reduce the scope of the Tealium cookies (i.e. CONSENTMGR) to the current subdomain.

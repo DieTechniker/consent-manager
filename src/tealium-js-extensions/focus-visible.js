@@ -1,9 +1,12 @@
+// target profiles: external
+// The content of this file needs to be configured as a JS-extension with scope "DOM Ready".
+
 /**
  * customized version of https://github.com/WICG/focus-visible
  * we extracted the hardcoded classname 'focus-visible' and replaced it using the constant `FOCUS_CLASSNAME` so we can
  * map it to the tk-class `has-keyboardfocus`
  */
-const FOCUS_CLASSNAME = 'has-keyboardfocus'
+var FOCUS_CLASSNAME = 'has-keyboardfocus'
 
 /*******************************************************************************************/
 
