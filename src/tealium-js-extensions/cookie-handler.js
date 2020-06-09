@@ -1,5 +1,16 @@
-var TK_COOKIES = [
-    "tkConsentSettingsSaved",
+// target profiles: external (, possibly tk.de)
+// The content of this file needs to be configured as a JS-extension with scope "All Tags - Before Load Rules".
+//
+// NOTE: in order to debug in IE11 delete the CONSENTMGR cookie using the following command:
+// document.cookie = 'CONSENTMGR=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=' + location.hostname;
+
+/**
+ * List of cookies created by the TK-consent manager
+ * @type {string[]}
+ */
+var TK_CONSENT_MASTER_COOKIE = "tkConsentSettingsSaved";
+var TK_CONSENT_COOKIES = [
+    TK_CONSENT_MASTER_COOKIE,
     "tkConsentDiensteVonDrittanbietern",
     "tkConsentNutzergerechteGestaltung",
     "tkConsentWirtschaftlicherWerbeeinsatz"
@@ -26,16 +37,29 @@ function getCookie(cname) {
     return '';
 }
 
+/**
+ * deletes the cookie of the specified name
+ * @param name
+ */
 function deleteCookie(name) {
-    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
 }
 
+/**
+ * If no tealium consent manager cookie is found all tk consent cookies must be deleted.
+ * In case of deletion of one of the tk consent cookies the page will be reloaded.
+ * The tealium consent manager cookie might have been deleted or had a shorter TTL than the TK consent cookies).
+ */
 (function handleConsentCookies() {
     var tealiumConsentCookie = getCookie("CONSENTMGR");
-    if (!!tealiumConsentCookie) {
-        for (var i = 0; i < TK_COOKIES.length; i++) {
-            var cookieName = TK_COOKIES[i];
-            deleteCookie(cookieName);
+    if (!!!tealiumConsentCookie) {
+        // If no tealium consent manager cookie is found all tk consent cookies must be deleted.
+        for (var i = 0; i < TK_CONSENT_COOKIES.length; i++) {
+            var tkCookieName = TK_CONSENT_COOKIES[i];
+            if (!!getCookie(tkCookieName)) {
+                // tk consent cookie was found
+                deleteCookie(tkCookieName);
+            }
         }
     }
 })()
