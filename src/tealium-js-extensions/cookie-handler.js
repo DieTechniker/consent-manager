@@ -1,5 +1,6 @@
-// target profiles: external (, possibly tk.de)
-// The content of this file needs to be configured as a JS-extension with scope "All Tags - Before Load Rules".
+// target profiles: external
+// The content of this file needs to be configured as a JS-extension with scope "All Tags - Before Load Rules" -
+// that way (if needed) the cookies will be deleted before being read by the consent manager script.
 //
 // NOTE: in order to debug in IE11 delete the CONSENTMGR cookie using the following command:
 // document.cookie = 'CONSENTMGR=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; domain=' + location.hostname;
