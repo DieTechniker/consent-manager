@@ -47,8 +47,7 @@ function deleteCookie(name) {
 
 /**
  * If no tealium consent manager cookie is found all tk consent cookies must be deleted.
- * In case of deletion of one of the tk consent cookies the page will be reloaded.
- * The tealium consent manager cookie might have been deleted or had a shorter TTL than the TK consent cookies).
+ * The tealium consent manager cookie might have been deleted or had a shorter TTL than the TK consent cookies.
  */
 (function handleConsentCookies() {
     var tealiumConsentCookie = getCookie("CONSENTMGR");
