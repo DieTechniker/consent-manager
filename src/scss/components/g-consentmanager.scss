@@ -87,13 +87,6 @@ body.is-display-consentmanager .g-consentmanager {
   overflow-y: auto;
   overflow-x: hidden;
 
-  &:focus {
-    outline: none;
-  }
-  .has-keyboardfocus:focus {
-    outline: 2px solid $color-cyan-c1;
-  }
-
   @include use-breakpoint($breakpoint-navigation, above) {
     padding-top: $size-content-side-space;
     padding-bottom: $size-content-side-space;
