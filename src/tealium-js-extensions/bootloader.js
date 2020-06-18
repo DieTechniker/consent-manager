@@ -1,3 +1,5 @@
+// target profiles: external
+// The content of this file needs to be configured as a JS-extension with scope "DOM Ready".
 
 (function initializeConsentManager() {
     if (utag && utag.gdpr && utag.gdpr.showConsentPreferences) {
