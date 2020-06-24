@@ -106,7 +106,8 @@ body.is-display-consentmanager .g-consentmanager {
     transform: translateX(-50%);
     min-height: auto;
     height: auto;
-    width: 768px;
+    width: 100%;
+    max-width: 768px;
   }
 }
 
