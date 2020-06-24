@@ -291,6 +291,9 @@ body.is-display-consentmanager .g-consentmanager {
   @include use-breakpoint($breakpoint-navigation, above) {
     display: none;
   }
+  @include ie11 {
+    display: none;
+  }
 }
 
 .g-consentmanager__close {
