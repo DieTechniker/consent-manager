@@ -1,12 +1,11 @@
-# TK Consent Manager (für externe Websites)
+# TK Consent Manager (for external websites)
 
-## Installation 
-Nachdem das Projekt ausgecheckt wurde, muss initial ein `yarn install` ausgeführt werden, um sämtliche Dependencies zu installieren.
+## Installation
+After checking out the project, run `yarn install` once in order to install all needed dependencies.
+You will need [Parcel](https://parceljs.org/getting_started.html) for running and building the project locally: `yarn global add parcel-bundler`
 
-## Lokale Entwicklung
-Über den Befehl `yarn start` wird mit Hilfe von [Parcel](https://parceljs.org/getting_started.html) ein lokaler Server gestartet, der auf der Adresse https://localhost:1234 läuft und den lokalen Entwicklungsstand reflektiert. Hot-Reloading bei Änderungen am Quellcode wird unterstützt.
-Platzhalter werden in diesem Modus nicht ersetzt.
+## Starting the server for local development 
+By running the command `yarn start` parcel will start a local dev-server (https://localhost:1234). Updates to the current codebase will be reflected immediately thanks to Parcel's [Hot Module Replacement](https://parceljs.org/hmr.html). Placeholders used in the templates will NOT be replaced in this mode of operation.
 
-## Testlauf
-Über den Befehl `yarn test` wird mit Hilfe von [Parcel](https://parceljs.org/getting_started.html) ein lokaler Server gestartet, der auf der Adresse https://localhost:1234 läuft und den aktuell publizierten.
-Die Platzhalter werden in diesem Modus ersetzt, so wie diese im Tealium-Profil der TK hinterlegt sind.
+## Testing the currently deployed TK 'dev'-profile 
+By running the command `yarn start` parcel will start a local dev-server (https://localhost:1234). It will display an empty page containing the TK consent manager as defined in the currently published  'dev'-profile of the TK Tealium account. This is helpful for testing the resulting Consent Manager as it will be distributed to external websites. Placeholders used in the templates will be replaced with the final texts in this mode of operation.
