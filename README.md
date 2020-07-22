@@ -13,7 +13,7 @@ By running the command `yarn start` parcel will start a local dev-server (https:
 ## Changelog
 
 ### Release 1.0.1 (2020-07-22)
-* fix dependabot issues
+* fix dependabot findings
 ### Release 1.0.0 (2020-06-30)
 * improved responsiveness for IE11
 * hiding TK logo for IE11
