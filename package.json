@@ -1,8 +1,8 @@
 {
-  "name": "tealium_gdpr",
-  "version": "1.0.0",
+  "name": "consent-manager",
+  "version": "1.0.1",
   "main": "index.js",
-  "repository": "https://github.tk-online.net/web/tealium_gdpr.git",
+  "repository": "https://github.com/DieTechniker/consent-manager.git",
   "author": "Lorenz Kahl <p224162@tk.de>",
   "license": "MIT",
   "devDependencies": {
@@ -14,7 +14,8 @@
     "posthtml-include": "^1.2.0",
     "posthtml-modules": "^0.4.2",
     "sass": "^1.23.7",
-    "susy": "^3.0.5"
+    "susy": "^3.0.5",
+    "minimist": "^1.2.3"
   },
   "scripts": {
     "start": "parcel serve ./src/consentManager.html --https --open --no-cache",
