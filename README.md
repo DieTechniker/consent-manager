@@ -12,6 +12,8 @@ By running the command `yarn start` parcel will start a local dev-server (https:
 
 ## Changelog
 
+### Release 1.0.2 (2021-09-16)
+* fixed A11y issue where sticky buttons were not accessible with >= 400% page-zoom (on desktop browsers)
 ### Release 1.0.1 (2020-07-22)
 * fix dependabot findings
 ### Release 1.0.0 (2020-06-30)
