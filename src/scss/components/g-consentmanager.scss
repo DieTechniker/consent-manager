@@ -149,26 +149,18 @@ body.is-display-consentmanager .g-consentmanager {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: flex-end;
-
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  align-items: flex-start;
   width: 100%;
+
   // fix collapsing sticky container on mobile Safari
   min-height: 200px;
+
   padding-top: 20px;
   padding-bottom: $size-content-side-space-mobile;
   padding-left: $size-content-side-space-mobile;
   padding-right: $size-content-side-space-mobile;
 
   background-color: $color-white-w1;
-
-  box-shadow: 0 20px 15px 15px $color-anthracite-a6;
-  @include use-breakpoint($breakpoint-navigation, above) {
-    box-shadow: none;
-  }
 
   > * {
     margin-bottom: 10px;
@@ -179,14 +171,12 @@ body.is-display-consentmanager .g-consentmanager {
   }
 
   @include use-breakpoint($breakpoint-navigation, above) {
-    position: relative;
-    justify-content: flex-end;
-    align-items: center;
     flex-direction: row;
-    min-height: auto;
+    align-items: center;
     padding-left: $size-content-side-space;
     padding-right: $size-content-side-space;
     padding-bottom: 0;
+    min-height: auto;
 
     > * {
       margin-left: 20px;
@@ -207,6 +197,29 @@ body.is-display-consentmanager .g-consentmanager {
       &:last-child {
         margin-bottom: 0;
       }
+    }
+  }
+}
+
+// buttons should only be sticky on touch devices, otherwise users can not use consent manger on desktop, if zoom is > 400%
+.has-touch {
+  .g-consentmanager__buttons {
+    flex-direction: column;
+    align-items: flex-end;
+
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+
+    box-shadow: 0 20px 15px 15px $color-anthracite-a6;
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+      position: relative;
+      align-items: center;
+      flex-direction: row;
+      box-shadow: none;
     }
   }
 }
@@ -265,6 +278,7 @@ body.is-display-consentmanager .g-consentmanager {
 
 .g-consentmanager__setting-checkbox {
   margin-bottom: 0;
+  box-sizing: content-box;
 }
 
 // Details are shown
