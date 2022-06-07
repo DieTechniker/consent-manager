@@ -1,116 +1,118 @@
-.e-checkbox {
-    margin-bottom: 20px;
-}
-
-.e-checkbox__input {
-    position: absolute;
-    opacity: 0;
-}
-
-.e-checkbox__label {
-    @include use-text(t9);
-
-    position: relative;
-    display: block;
-    padding-top: 5px;
-    padding-left: 45px;
-    cursor: pointer;
-
-    &::before,
-    &::after {
-        background-color: $color-white-w1;
+#tkConsentmanager {
+    .e-checkbox {
+        margin-bottom: 20px;
     }
-}
 
-.e-checkbox__input {
-    &:focus,
-    &:active {
-        &:not([disabled]) {
-            ~ .e-checkbox__label {
-                &::before {
-                    box-shadow: 0 0 5px 0 $color-grey-shadow;
+    .e-checkbox__input {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .e-checkbox__label {
+        @include use-text(t9);
+
+        position: relative;
+        display: block;
+        padding-top: 5px;
+        padding-left: 45px;
+        cursor: pointer;
+
+        &::before,
+        &::after {
+            background-color: $color-white-w1;
+        }
+    }
+
+    .e-checkbox__input {
+        &:focus,
+        &:active {
+            &:not([disabled]) {
+                ~ .e-checkbox__label {
+                    &::before {
+                        box-shadow: 0 0 5px 0 $color-grey-shadow;
+                    }
                 }
             }
         }
-    }
 
-    ~ .e-checkbox__label {
-        min-height: 30px;
-
-        &::before {
-            position: absolute;
-            top: 0;
-            left: 0;
-            border: 1px solid $color-anthracite-a6;
-            color: transparent;
-            content: '';
-            display: block;
-            width: 30px;
-            height: 30px;
-            box-sizing: border-box;
-        }
-
-        &:hover {
-            &::before,
-            &::after {
-                border-color: $color-anthracite-a2;
-            }
-        }
-    }
-}
-
-.e-checkbox__input {
-    &:checked {
         ~ .e-checkbox__label {
-            &::before {
-                border-color: $color-anthracite-a2;
-                background-color: $color-anthracite-a2;
-            }
+            min-height: 30px;
 
-            &::after {
-                content: '';
+            &::before {
                 position: absolute;
                 top: 0;
                 left: 0;
+                border: 1px solid $color-anthracite-a6;
+                color: transparent;
+                content: '';
                 display: block;
                 width: 30px;
                 height: 30px;
-                background: url('https://www.tk.de/blueprint/static/assets/base/images/checkbox_checkmark.svg') no-repeat transparent center center;
-            }
-        }
-    }
-
-    &.has-keyboardfocus ~ .e-checkbox__label {
-        &::before {
-            outline: 2px solid $color-cyan-c1;
-        }
-    }
-
-    // sass-lint:disable force-attribute-nesting
-    .m-formbuttongroup[data-has-error='true'] &,
-    &:invalid,
-    &[aria-invalid='true'] {
-        ~ .e-checkbox__label {
-            &::before {
-                border: 1px solid $color-red-r1;
+                box-sizing: border-box;
             }
 
             &:hover {
-                &::before {
-                    border: 1px solid $color-red-r2;
+                &::before,
+                &::after {
+                    border-color: $color-anthracite-a2;
                 }
             }
         }
     }
-    // sass-lint:enable force-attribute-nesting
 
-    &[disabled] {
-        ~ .e-checkbox__label {
-            color: $color-grey-g1;
+    .e-checkbox__input {
+        &:checked {
+            ~ .e-checkbox__label {
+                &::before {
+                    border-color: $color-anthracite-a2;
+                    background-color: $color-anthracite-a2;
+                }
 
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    background: url('https://www.tk.de/blueprint/static/assets/base/images/checkbox_checkmark.svg') no-repeat transparent center center;
+                }
+            }
+        }
+
+        &.has-keyboardfocus ~ .e-checkbox__label {
             &::before {
-                border: 1px solid $color-grey-g1;
-                background-color: $color-grey-g2;
+                outline: 2px solid $color-cyan-c1;
+            }
+        }
+
+        // sass-lint:disable force-attribute-nesting
+        .m-formbuttongroup[data-has-error='true'] &,
+        &:invalid,
+        &[aria-invalid='true'] {
+            ~ .e-checkbox__label {
+                &::before {
+                    border: 1px solid $color-red-r1;
+                }
+
+                &:hover {
+                    &::before {
+                        border: 1px solid $color-red-r2;
+                    }
+                }
+            }
+        }
+        // sass-lint:enable force-attribute-nesting
+
+        &[disabled] {
+            ~ .e-checkbox__label {
+                color: $color-grey-g1;
+
+                &::before {
+                    border: 1px solid $color-grey-g1;
+                    background-color: $color-grey-g2;
+                }
             }
         }
     }
