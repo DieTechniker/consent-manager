@@ -15,7 +15,8 @@
     "posthtml-modules": "^0.4.2",
     "sass": "^1.52.2",
     "susy": "^3.0.5",
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "postcss": "^8.1.0"
   },
   "scripts": {
     "start": "parcel serve ./src/consentManager.html --https --open --no-cache",
