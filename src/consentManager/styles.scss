@@ -17,7 +17,7 @@
 // die TK Komponenten müssen durch einen extra Wrapper gescoped werden - weil:
 // * es zu Konflikten kommen, wenn der Drittanbieter die selben Klasse verwendet
 // * es könnten zudem Probleme beim tk-markenportal.de entstehen
-#tkConsentmanagerExternal {
+.tkConsentmanagerExternal {
   // components
   @import '../scss/components/e-checkbox.scss';
   @import '../scss/components/e-cta.scss';
