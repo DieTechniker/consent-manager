@@ -2,7 +2,6 @@
 
 ## Installation
 After checking out the project, run `yarn install` once in order to install all needed dependencies.
-You will need [Parcel](https://parceljs.org/getting_started.html) for running and building the project locally: `yarn global add parcel-bundler`
 
 ## Starting the server for local development 
 By running the command `yarn start` parcel will start a local dev-server (https://localhost:1234). Updates to the current codebase will be reflected immediately thanks to Parcel's [Hot Module Replacement](https://parceljs.org/hmr.html). Placeholders used in the templates will NOT be replaced in this mode of operation.
@@ -12,6 +11,8 @@ By running the command `yarn start` parcel will start a local dev-server (https:
 
 ## Changelog
 
+### Release 1.0.3 (2022-06-09)
+* updated dependencies and checkbox style to avoid overrides from f.E. wpforms
 ### Release 1.0.2 (2021-09-16)
 * fixed A11y issue where sticky buttons were not accessible with >= 400% page-zoom (on desktop browsers)
 ### Release 1.0.1 (2020-07-22)
