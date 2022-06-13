@@ -1,26 +1,33 @@
 {
   "name": "consent-manager",
-  "version": "1.0.1",
-  "main": "index.js",
+  "version": "1.0.3",
   "repository": "https://github.com/DieTechniker/consent-manager.git",
   "author": "Lorenz Kahl <p224162@tk.de>",
   "license": "MIT",
   "devDependencies": {
-    "autoprefixer": "^9.6.1",
+    "@parcel/transformer-sass": "2.6.0",
+    "autoprefixer": "^10.4.7",
     "breakpoint-sass": "^2.7.1",
-    "cssnano": "^4.1.10",
-    "postcss-modules": "^1.4.1",
+    "cssnano": "^5.1.11",
+    "minimist": "^1.2.6",
+    "parcel": "^2.6.0",
+    "postcss": "^8.1.0",
+    "postcss-modules": "^4.1.11",
     "posthtml": "^0.11.4",
     "posthtml-include": "^1.2.0",
     "posthtml-modules": "^0.4.2",
-    "sass": "^1.23.7",
-    "susy": "^3.0.5",
-    "minimist": "^1.2.3"
+    "sass": "^1.52.2",
+    "susy": "^3.0.5"
   },
   "scripts": {
     "start": "parcel serve ./src/consentManager.html --https --open --no-cache",
-    "build": "rm -rf dist && parcel build ./src/consentManager.html --no-source-maps --no-minify --no-cache --bundle-node-modules",
+    "build": "rm -rf dist && parcel build ./src/consentManager.html --no-source-maps --no-optimize --no-cache",
     "test": "parcel serve ./src/test.html --https --port 4321 --open"
+  },
+  "targets": {
+    "default": {
+      "includeNodeModules": true
+    }
   },
   "browserslist": [
     ">2%",
