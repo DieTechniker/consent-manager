@@ -31,30 +31,30 @@ Placeholders used in the templates will be replaced with the final texts in this
     <!-- Prod environment -->
     <script src="https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js"></script>
     ```
+   - For different environments, use the following script URLs:
 
-- Integration Snippet: [TK Tag-Management Integration Code](https://gist.github.com/JanThiel/c5ad7dd7b3beb81066001a979d9d41ee)
-- Set the variable `tkTagManagementMode` to 'prod' before going live.
-- For different environments, use the following script URLs:
-
-  | Website environment | Tealium environment | Script-URL                                                             |
-  |---------------------|---------------------|------------------------------------------------------------------------|
-  | Development         | dev                 | https://www.tk.de/tk-tag-manager/delivery/tealium-external-dev/utag.js |
-  | Production          | prod                | https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js     |
+     | Website environment | Tealium environment | Script-URL                                                             |
+     |---------------------|---------------------|------------------------------------------------------------------------|
+     | Development         | dev                 | https://www.tk.de/tk-tag-manager/delivery/tealium-external-dev/utag.js |
+     | Production          | prod                | https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js     |
+   - You can also use the following snippet for the integration: 
+     - [TK Tag-Management Integration Code](https://gist.github.com/JanThiel/c5ad7dd7b3beb81066001a979d9d41ee)
+     - Note: set the variable `tkTagManagementMode` to 'prod' before going live.
 
 2. **Configuration of the Data Layer**:
-    - Define a JSON object `tkWebAnalyticsData` before embedding TK Tag Management.
-    - Example:
-      ```javascript
-      window.tkWebAnalyticsData = {
-        contentName: "homepage",
-        navigationLevel1: "expo",
-        navigationLevel2: document.domain,
-        navigationLevel3: "article",
-        navigationLevel4: "archive",
-        navigationLevel5: "2023-09",
-        isOnePager: false
-      };
-      ```
+   - Define a JSON object `tkWebAnalyticsData` before embedding TK Tag Management.
+     - Example:
+       ```javascript
+       window.tkWebAnalyticsData = {
+         contentName: "homepage",
+         navigationLevel1: "expo",
+         navigationLevel2: document.domain,
+         navigationLevel3: "article",
+         navigationLevel4: "archive",
+         navigationLevel5: "2023-09",
+         isOnePager: false
+       };
+       ```
 
 3. **Consent Manager Integration**:
     - The Consent Manager is deployed via the Tealium Tag Manager and should appear as an overlay on the first visit.
