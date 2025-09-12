@@ -37,7 +37,7 @@ Placeholders used in the templates will be replaced with the final texts in this
 - For different environments, use the following script URLs:
 
   | Website environment | Tealium environment | Script-URL                                                             |
-      |---------------------|---------------------|------------------------------------------------------------------------|
+  |---------------------|---------------------|------------------------------------------------------------------------|
   | Development         | dev                 | https://www.tk.de/tk-tag-manager/delivery/tealium-external-dev/utag.js |
   | Production          | prod                | https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js     |
 
