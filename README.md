@@ -25,12 +25,12 @@ Placeholders used in the templates will be replaced with the final texts in this
 1. **Basic Integration of TK Tag Management**:
     - Implement a `<script>` block on all pages, placed directly before the closing `</body>` tag.
     - The integration works via `<script>` tag, e.g.:
-    ```html
-    <!-- Dev environment -->
-    <script src="https://www.tk.de/tk-tag-manager/delivery/tealium-external-dev/utag.js"></script>
-    <!-- Prod environment -->
-    <script src="https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js"></script>
-    ```
+        ```html
+        <!-- Dev environment -->
+        <script src="https://www.tk.de/tk-tag-manager/delivery/tealium-external-dev/utag.js"></script>
+        <!-- Prod environment -->
+        <script src="https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js"></script>
+        ```
     - For different environments, use the following script URLs:
 
       | Website environment | Tealium environment | Script-URL                                                             |
