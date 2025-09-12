@@ -37,18 +37,18 @@ Placeholders used in the templates will be replaced with the final texts in this
       |---------------------|---------------------|------------------------------------------------------------------------|
       | Development         | dev                 | https://www.tk.de/tk-tag-manager/delivery/tealium-external-dev/utag.js |
       | Production          | prod                | https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js     |
-        - You can also use the following snippet for the integration:
-           ```html
-           <script type="text/javascript">
-               (function(a,b,c,d,tkTagManagementMode){
-                   tkTagManagementMode = 'dev'; // 'dev' or 'prod'
-                   a='https://www.tk.de/tk-tag-manager/delivery/'+ (tkTagManagementMode === 'dev' ? 'tealium-external-dev' : 'tealium-external') + '/utag.js';
-                   b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
-                   a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
-               })();
-           </script>
-           ```
-        - Note: set the variable `tkTagManagementMode` to 'prod' before going live.
+    - You can also use the following snippet for the integration:
+       ```html
+       <script type="text/javascript">
+           (function(a,b,c,d,tkTagManagementMode){
+               tkTagManagementMode = 'dev'; // 'dev' or 'prod'
+               a='https://www.tk.de/tk-tag-manager/delivery/'+ (tkTagManagementMode === 'dev' ? 'tealium-external-dev' : 'tealium-external') + '/utag.js';
+               b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+               a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+           })();
+       </script>
+       ```
+      - Note: set the variable `tkTagManagementMode` to 'prod' before going live.
 
 2. **Configuration of the Data Layer**:
     - Define a JSON object `tkWebAnalyticsData` before embedding TK Tag Management.
