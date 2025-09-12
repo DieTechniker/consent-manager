@@ -18,8 +18,6 @@ empty page containing the TK consent manager as defined in the currently publish
 account. This is helpful for testing the resulting Consent Manager as it will be distributed to external websites.
 Placeholders used in the templates will be replaced with the final texts in this mode of operation.
 
-Sure, here is the entire guide in Markdown:
-
 ## Integrating the Consent Manager on an External Website
 
 ### Steps:
