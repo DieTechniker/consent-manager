@@ -32,7 +32,7 @@ Placeholders used in the templates will be replaced with the final texts in this
     <script src="https://www.tk.de/tk-tag-manager/delivery/tealium-external/utag.js"></script>
     ```
 
-- Integration code: [Integration Code](https://gist.github.com/JanThiel/c5ad7dd7b3beb81066001a979d9d41ee)
+- Integration Snippet: [TK Tag-Management Integration Code](https://gist.github.com/JanThiel/c5ad7dd7b3beb81066001a979d9d41ee)
 - Set the variable `tkTagManagementMode` to 'prod' before going live.
 - For different environments, use the following script URLs:
 
