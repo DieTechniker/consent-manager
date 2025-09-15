@@ -1,0 +1,84 @@
+@mixin layout-content-default {
+  /**
+     * every child element will be constrained to the full width of "the grid" (12 columns)
+     * entities may opt-out of this behaviour by adding the class ".has-own-width"
+     **/
+  > *:not(.has-own-width) {
+    @include content(true);
+  }
+
+  > * {
+    // default bottom spacing
+    margin-bottom: $size-module-bottom-space-mobile;
+
+    @include use-breakpoint($breakpoint-navigation, above) {
+      margin-bottom: $size-module-bottom-space-desktop;
+    }
+
+    &:last-child {
+      margin-bottom: $size-module-last-bottom-space-mobile;
+
+      @include use-breakpoint($breakpoint-navigation, above) {
+        margin-bottom: $size-module-last-bottom-space-desktop;
+      }
+
+      &.has-highlight {
+        margin-bottom: 0;
+      }
+    }
+
+    // default shadow styles
+    @include use-breakpoint(phablet, below) {
+      @include content-shadow-top;
+
+      // add 20px border to prevent collapsing margins and get 100px in total
+      border-top: 20px solid transparent;
+
+      &::before {
+        // position shadow to the optical center of 100px
+        transform: translateY(-58px);
+      }
+    }
+  }
+
+  // do not show shadow line around highlighted elements and first element in template
+  > .has-highlight,
+  > :first-child,
+  > [class*='--hasbackgroundcolor'] + *,
+  > .has-highlight + *,
+  > .no-mobile-seperator,
+  > .m-header--hasimage + *,
+  > .m-header--hasbackgroundcolor + *,
+  > .m-stickydiscardable__wrapper {
+    @include use-breakpoint(phablet, below) {
+      @include content-shadow-top;
+
+      border-top: 0;
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  > .m-header--hasimage + *,
+  > .m-header--hasbackgroundcolor + * {
+    @include use-breakpoint(phablet, below) {
+      margin-top: $size-module-bottom-space-mobile--no-shadow;
+    }
+  }
+
+  // highlights do not have gaps inbetween, they are visually connected
+  > .has-highlight + .has-highlight {
+    margin-top: -$size-module-bottom-space-mobile;
+
+    @include use-breakpoint(mini-tablet, above) {
+      margin-top: -$size-module-bottom-space-desktop;
+    }
+  }
+}
+
+@mixin has-icon {
+  position: relative;
+  padding-left: 1.1em;
+}

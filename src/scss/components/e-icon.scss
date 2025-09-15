@@ -1,48 +1,71 @@
-
 /**
  * Base styles -------------------------------------------------
  */
 
 $e-icon-styles-mapping: (
-    'default': 'style-cluster-1',
-    'faq': 'style-cluster-2',
-    'gm': 'style-cluster-2',
-    'mitgliedwerden': 'style-cluster-3',
-    'meinetk': 'style-cluster-3'
+        'default': 'style-cluster-1',
+        'faq': 'style-cluster-2',
+        'gm': 'style-cluster-2',
+        'mitgliedwerden': 'style-cluster-3',
+        'meinetk': 'style-cluster-3',
 );
 
 .e-icon {
-    fill: $color-anthracite-a2;
-    color: $color-grey-g4; // because some icons are not integerated correctly right now
+  fill: $color-anthracite-a2;
+  color: $color-grey-g4; // because some icons are not integerated correctly right now
+  @include forced-colors();
+  position: relative;
 }
 
 .e-icon--inline {
-    margin-right: -4.5px;
-    display: inline-block;
+  margin-right: -4.5px;
+  display: inline-block;
 }
 
 .e-icon--block {
-    display: block;
+  display: block;
 }
 
 .has-icon {
-    @include has-icon;
+  @include has-icon;
+}
+
+.e-icon__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .e-icon--text {
-    position: absolute;
-    display: block;
-    height: .8em;
-    left: 0;
-    top: .33em;
+  position: absolute;
+  display: block;
+  width: 0.8em;
+  height: 0.8em;
+  left: 0;
+  top: 0.33em;
 }
 
-
-.e-icon--illustration {
-    // illustrations use fill: currentColor
-    @include use-bereich-styles($e-icon-styles-mapping, ('color'));
-
-    .m-header--hasbackgroundcolor & {
-        color: $color-white-w1;
+.e-icon--illustration .e-icon__svg {
+  // illustrations use fill: currentColor
+  @include use-bereich-styles($e-icon-styles-mapping, ('color'));
+  .m-header--hasbackgroundcolor & {
+    color: $color-white-w1;
+  }
+  /* Durch das "none" wird forced-color-adjust ausgeschaltet: Der Browser nimmt die herkömmlichen Farben
+     * Das !important bei color überschreibt die höhrere Spezifizierung, welche durch das Mapping in use-bereich-styles erfolgt.
+     * Somit ist gewährleistet, dass im Kontrast-Mode die Illustrativen Icons sowohl im hellen als dunklen Modus funktionieren.
+     */
+  @include forced-colors(none) {
+    @media (prefers-color-scheme: dark) {
+      fill: $color-white-w1;
+      color: rgba($color-grey-g4, 0.3) !important;
     }
+    @media (prefers-color-scheme: light) {
+      fill: $color-anthracite-a2;
+      color: rgba($color-grey-g4, 0.5) !important;
+    }
+    .m-header--hasbackgroundcolor & {
+      color: unset;
+    }
+  }
 }

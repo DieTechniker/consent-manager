@@ -1,4 +1,4 @@
-
+@use 'sass:math';
 /**
  * Base Sizes
  */
@@ -7,7 +7,7 @@ $size-article-max: $size-content-max;
 $size-page-max: 1680px;
 $size-spacer: 10px;
 $size-content-side-space: 40px;
-$size-content-side-space-mobile: 6vw;
+$size-content-side-space-mobile: 24px;
 
 $size-module-bottom-space-mobile: 80px;
 $size-module-bottom-space-mobile--no-shadow: 50px;
@@ -17,19 +17,11 @@ $size-module-last-bottom-space-desktop: 120px;
 
 $navigation-height-desktop: 65px;
 $navigation-height-mobile: 50px;
-$logout-height-mobile: 30px;
-
-$breakpoint-navigation: mini-tablet;
-$breakpoint-article: desktop;
-$breakpoint-navigation-searchbox-show: $breakpoint-navigation;
-$breakpoint-global-hover: desktop;
+$logout-height-mobile: 48px;
 
 $content-left-exposed: -55px;
 
-$stickyconfirm-height: 175px;
-$stickyconfirm-breakpoint-phablet: 480px;
-$stickyconfirm-height-phablet-up: 155px;
-$stickyconfirm-height-navigation-up: 90px;
+$stickydiscardable-height: 80px;
 
 $sharingtoolbar-icon-size: 32px;
 $sharingtoolbar-icon-size-desktop-above: 24px;
@@ -39,49 +31,54 @@ $m-header-margin-bottom-minitablet-up: 60px;
 $m-header-margin-bottom-desktop-up: 60px;
 
 /**
+ * Calculates dynamic padding when size-content-max is reached
+ * in order to have fully centered and aligned content
+ * the second variable provides a min-padding using 'max()' calculation,
+ * which selects the largest value in the given list
+ */
+$dynamic-horizontal-padding: calc((100vw - $size-content-max) / 2 + $size-content-side-space);
+$dynamic-horizontal-padding-with-min-value: max($size-content-side-space, $dynamic-horizontal-padding);
+
+/**
  * Offsets
  */
 // TODO LK: introduce module agnostic offset variables
 $g-form-offset-vertical: 48px;
 
 /**
- * z-Indexes
- */
-$z-index-below-image: 5;
-$z-index-above-button: 5;
-$z-index-image: 10;
-$z-index-above-image: 20;
-$z-index-dropdown: 130; // to set over index-shadow (100)
-$z-index-shadow: 100;
-$z-index-floating-button: 950;
-$z-index-logo-mobile: 1100;
-$z-index-header-shim: 1200;
-$z-index-reading-time: 1250;
-$z-index-above-shim: 1275;
-$z-index-ousp: 1280;
-$z-index-menu-list: 1290;
-$z-index-menus: 1300;
-$z-index-logout: 1310;
-$z-index-above-menu: 1400;
-$z-index-modals: 2000;
-$z-index-logo: 2002;
-$z-index-portal: 1350;
-$z-index-above-modals: 3000;
-$z-index-keyboard-focus: 4000;
-$z-index-grid-helper: 5000;
-
-/**
  * The Grid, a cluster of information... no stop, just the Layout Grid!
  */
-
 $susy-columns: 12;
 
 $susy: (
-    columns: susy-repeat(12),
-    gutters: 1 / 10,
-    math: fluid,
-    output: float,
-    gutter-position: after,
-    global-box-sizing: border-box,
-    debug: (image: show)
+  columns: susy-repeat(12),
+  gutters: math.div(1, 10),
+  math: fluid,
+  output: float,
+  gutter-position: after,
+  global-box-sizing: border-box,
+  debug: (
+    image: show,
+  ),
 );
+
+/**
+ * Evoheader Variables
+ */
+$g-evoheader-module-height-xs: 64px;
+$g-evoheader-module-height-m: 72px;
+$g-evoheader-module-height-l: 80px;
+
+/**
+  logo variables
+ */
+$g-evoheader-logo-size-xs: 80px;
+$g-evoheader-logo-size-m: 100px;
+$g-evoheader-logo-size-l: 120px;
+
+/**
+  icon button variables
+ */
+$g-evoheader-icon-size-mobile: 48px;
+$g-evoheader-icon-size-desktop: $g-evoheader-icon-size-mobile;
+$g-evoheader-icon-hover-color: #0000000a;

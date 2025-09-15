@@ -48,7 +48,7 @@ body.is-display-consentmanager .g-consentmanager {
 
   @include use-breakpoint($breakpoint-navigation, above) {
     align-items: center;
-    padding: 30px 0 0 0; // make rooom for the button sticking half way out of the box
+    padding: 30px 0 0 0; // make room for the button sticking half way out of the box
   }
   @include ie11 {
     display: block;
@@ -64,7 +64,9 @@ body.is-display-consentmanager .g-consentmanager {
   max-width: 768px;
   flex-direction: column;
   max-height: 100%;
-
+  @include forced-colors {
+    border: 2px solid transparent;
+  }
   @include use-breakpoint($breakpoint-navigation, above) {
     flex-basis: auto;
   }
@@ -90,6 +92,7 @@ body.is-display-consentmanager .g-consentmanager {
   &:focus {
     outline: none;
   }
+
   .has-keyboardfocus:focus {
     outline: 2px solid $color-cyan-c1;
   }
@@ -118,6 +121,36 @@ body.is-display-consentmanager .g-consentmanager {
   @include use-breakpoint($breakpoint-navigation, above) {
     padding-left: $size-content-side-space;
     padding-right: $size-content-side-space;
+  }
+}
+
+.g-consentmanager__hinttext-englisch {
+  margin-bottom: 20px;
+  padding-left: $size-content-side-space-mobile;
+  padding-right: $size-content-side-space-mobile;
+  @include use-breakpoint($breakpoint-navigation, above) {
+    padding-left: $size-content-side-space;
+    padding-right: $size-content-side-space;
+  }
+
+  .m-richtext__highlight {
+    display: flex;
+    flex-direction: column;
+    @include use-breakpoint($breakpoint-navigation, above) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      // Attribut-Selector um redaktionelle Änderung des Headline-Levels zu tolerieren (.e-headline--h2 / .e-headline--h3), denn leider bekommt die Headline im Richtext keine Basis-Block-Klasse (.e-headline), wie zu erwarten gewesen wäre
+      [class*='e-headline'] {
+        margin: 0 !important; // der Richtext definiert leider bereits margin auf folgendem Selektor: `.m-richtext > .m-richtext__highlight> *` --> ¯\_(ツ)_/¯
+      }
+    }
+  }
+
+  .e-cta {
+    align-self: flex-end;
+    order: 1;
   }
 }
 
@@ -372,16 +405,14 @@ body.is-display-consentmanager .g-consentmanager {
   .g-consentmanager__setting--highlight {
     background-color: $color-anthracite-a11;
     border-left: $highlight-border-width solid $color-petrol-p1;
-    padding-left: calc(
-      #{$size-content-side-space-mobile}-#{$highlight-border-width}
-    );
+    padding-left: calc(#{$size-content-side-space-mobile}-#{$highlight-border-width});
     padding-top: $highlight-vertical-offset;
     padding-bottom: $highlight-vertical-offset;
     margin-bottom: $highlight-vertical-offset;
     @include use-breakpoint($breakpoint-navigation, above) {
-      padding-left: $size-content-side-space / 2 - $highlight-border-width;
+      padding-left: calc((#{$size-content-side-space} / 2) - #{$highlight-border-width});
       padding-right: $size-content-side-space;
-      margin-left: $size-content-side-space / 2;
+      margin-left: calc(#{$size-content-side-space}/ 2);
       margin-right: $size-content-side-space;
     }
   }
@@ -397,7 +428,6 @@ body.is-display-consentmanager .g-consentmanager {
 }
 
 // NOT highlighted settings have a larger bottom margin so we need to tweak this by moving the following setting up if it is highlighted
-.g-consentmanager__setting:not(.g-consentmanager__setting--highlight)
-  + .g-consentmanager__setting--highlight {
+.g-consentmanager__setting:not(.g-consentmanager__setting--highlight) + .g-consentmanager__setting--highlight {
   margin-top: -$highlight-vertical-offset;
 }
