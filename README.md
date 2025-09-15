@@ -79,7 +79,7 @@ Placeholders used in the templates will be replaced with the final texts in this
       This could be used inside the footer or privacy policy section.
 
 4. **Behavior of Consent-Dependent Content**:
-    - Third-party content requiring consent should only be embedded after explicit user consent.
+   > **Third-party content requiring consent should only be embedded after explicit user consent.**
     - Example placeholder:
       ```html
       <div class="maps-container">
