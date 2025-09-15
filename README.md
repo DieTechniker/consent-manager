@@ -84,7 +84,7 @@ Placeholders used in the templates will be replaced with the final texts in this
       ```html
       <div class="maps-container">
         <p>To view the map, please adjust your privacy settings.</p>
-        <button onclick="tk.consentManager.openConsentManager({ requestCategories: ['category_third_party_services'] })">Open Privacy Settings</button>
+        <button onclick="tk.consentManager.openConsentManager({ requestCategories: ['category_dienste_von_drittanbietern'] })">Open Privacy Settings</button>
       </div>
       ```
 
@@ -92,7 +92,7 @@ Placeholders used in the templates will be replaced with the final texts in this
     - If required user consent is missing, request it via JavaScript:
       ```javascript
       tk.consentManager.openConsentManager({
-        requestCategories: ['category_marketing', 'category_third_party_services']
+        requestCategories: ['category_wirtschaftlicher_werbeeinsatz', 'category_dienste_von_drittanbietern']
       });
       ```
 
